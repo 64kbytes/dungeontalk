@@ -1,1 +1,1 @@
-from lang import Lang
+from dungeontalk import DungeonTalk, DM
