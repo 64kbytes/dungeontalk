@@ -183,7 +183,7 @@ class Lang(object):
 			return '<none>'
 
 		def parse(self, parser, **kwargs):
-			pass
+			raise NotImplementedError
 
 		def __repr__(self):
 			return '<%s><%s>' % (self.__class__.__name__, self.word)

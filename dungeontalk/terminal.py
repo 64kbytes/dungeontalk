@@ -21,7 +21,7 @@ class Terminal:
 			self.interp.load();
 		"""
 
-		self.interp.read('test2.dtk', is_file=True)
+		self.interp.read('test.dtk', is_file=True)
 
 
 		while True:
@@ -50,7 +50,7 @@ class Terminal:
 			termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 			return ch
    
-T = Terminal('test2.dtk')
+T = Terminal()
 T.begin()
 
 
