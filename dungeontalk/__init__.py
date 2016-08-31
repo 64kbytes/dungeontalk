@@ -1,1 +1,1 @@
-from dungeontalk import DungeonTalk, DM
+from dungeontalk import DungeonTalk

@@ -6,7 +6,7 @@ import re
 
 class Lang(object):
 	"""
-	Coldwar scripting language	
+		Generic language definition
 	"""
 
 	delimiters = "[\"\':!,;+*^&@#$%&\-\\/\|=$()?<>\s\[\]]"
@@ -33,15 +33,13 @@ class Lang(object):
 	r_int	 		= r'^[0-9]+$'
 	r_not 			= r'^NOT$'
 	r_identifier 	= r'[_a-zA-Z][_a-zA-Z0-9]*'
-	r_atsign		= r'[@]'
 	
-
 	symbols = {
 		r_space: 			lambda w,t: Lang.Space(w,t),
 		r_newline:			lambda w,t: Lang.NewLine(w,t),
 		r_tab:				lambda w,t: Lang.Tab(w,t),
-		r_bracket_l: 		lambda w,t: Lang.Bracket(w,t,open=True),
-		r_bracket_r:		lambda w,t: Lang.Bracket(w,t,open=False),
+		r_bracket_l: 		lambda w,t: Lang.Bracket(w,t, open=True),
+		r_bracket_r:		lambda w,t: Lang.Bracket(w,t, open=False),
 		r_double_quote: 	lambda w,t: Lang.DoubleQuote(w,t),
 		r_single_quote: 	lambda w,t: Lang.SingleQuote(w,t),
 		r_parentheses_l: 	lambda w,t: Lang.Parentheses(w,t, open=True),
@@ -84,10 +82,6 @@ class Lang(object):
 		},
 		r_not:				lambda w,t: Lang.Not(w,t),
 		r_identifier:		lambda w,t: Lang.identifier(w,t),
-		r_atsign: {
-			r_identifier:	lambda w,t: Lang.Character(w,t),
-			None: 			lambda w,t: Lang.Ego(w,t)
-		}
 	}
 
 	keywords = {
@@ -99,22 +93,22 @@ class Lang(object):
 		'def':			lambda w,t: Lang.Def(w,t),
 		'exec':			lambda w,t: Lang.Exec(w,t),
 		'include':		lambda w,t: Lang.Include(w,t),
-		'WAIT':			lambda w,t: Lang.Wait(w,t),
-		'FAILSAFE':		lambda w,t: Lang.Failsafe(w,t)
+		#'WAIT':		lambda w,t: Lang.Wait(w,t),
+		#'FAILSAFE':	lambda w,t: Lang.Failsafe(w,t)
 	}
 	
 	parameters = {
-		'UNTIL':		lambda w,t: Lang.Until(w,t),
-		'BY':			lambda w,t: Lang.By(w,t),
-		'TUNE':			lambda w,t: Lang.Tune(w,t),
+		#'UNTIL':		lambda w,t: Lang.Until(w,t),
+		#'BY':			lambda w,t: Lang.By(w,t),
+		#'TUNE':		lambda w,t: Lang.Tune(w,t),
 	}
 	
 	bindings = {
-		'TAILED': None
+		#'TAILED': None
 	}
 	
 	builtins = {
-		'TAILED':		lambda w,t: Lang.Tailed(w,t,Lang.bindings[w])
+		#'TAILED':		lambda w,t: Lang.Tailed(w,t,Lang.bindings[w])
 	}
 	
 	clause = {
@@ -145,18 +139,28 @@ class Lang(object):
 
 	@staticmethod
 	def bind_keyword(keyword, cls):
-		Lang.keywords['keyword'] = lambda w,t: cls(w,t)
+		Lang.keywords[keyword] = Lang.handler(cls)
+
+	@staticmethod
+	def bind_parameter(parameter, cls):
+		Lang.parameters[parameter] = Lang.handler(cls)
+
+	@staticmethod
+	def bind_symbol(symbol, sequence):
+		Lang.symbols[symbol] = sequence
+
+	@staticmethod
+	def handler(cls, **kwargs):
+		return lambda w,t: cls(w,t, **kwargs)
 
 	class Evaluable(object):
 		pass
 	
-
 	class Callable(object):
 
 		def get_signature(self):
 			return self.signature
 	
-
 	# keywords
 	class Block(object):
 		def __init__(self, *args, **kwargs):
@@ -417,7 +421,7 @@ class Lang(object):
 			return '<keyword>'
 			
 		def __repr__(self):
-			return '<keyword %s>' % (self.word)
+			return '<%s>' % (self.word)
 			
 	
 	class Procedure(Keyword, Callable, Block,Control):
@@ -604,42 +608,7 @@ class Lang(object):
 		
 		def __repr__(self):
 			return '<parameter>'
-			
-	
-	class Until(Parameter):
-				
-		def __init__(self, *args, **kwargs):
-			super(Lang.Until, self).__init__(*args, **kwargs)
-		
-		
-	class By(Parameter):
-		
-		def __init__(self, *args, **kwargs):
-			super(Lang.By, self).__init__(*args, **kwargs)
-		
-	
-	class Tune(Parameter):
-		
-		def __init__(self, *args, **kwargs):
-			super(Lang.Tune, self).__init__(*args, **kwargs)
-			
-	class Wait(Keyword):
-		
-		def type(self):
-			return '<wait>'
-		
-		def parse(self, parser, **kwargs):
-			self.condition	= parser.build(parser.expression())
-			self.until		= parser.build(parser.clause(Lang.Until))
-			return [self, self.condition, self.until]
-		
-		def eval(self, interp, expression):
-			c = interp.eval(self.condition)
-			u = interp.eval(self.until)
-			print "WAITING %s UNTIL %s" % (c, u)
 
-		def __repr__(self):
-			return '<wait>'
 
 	class Prnt(Keyword):
 		
@@ -656,21 +625,7 @@ class Lang(object):
 		def __repr__(self):
 			return '<prnt>'
 	
-	class BuiltIn(Def):
-		def type(self):
-			return '<built-in>'
-		
-		def eval(self, interp, signature):
-			return self.bind(signature)
-					
-	class Tailed(BuiltIn):
-		
-		def __init__(self, token, pos=(None,None), binding=None, **kwargs):
-			# function binding
-			self.bind = binding
-			super(Lang.Tailed, self).__init__(token,pos, **kwargs)	
-				
-
+	
 	"""
 	PREPROCESSOR
 	
@@ -697,19 +652,6 @@ class Lang(object):
 			print source
 			exit(1)
 		
-	# entity
-	class GameObject(Lexeme):
-		pass
-
-	class Character(GameObject):
-		def type(self):
-			return '<ident>'
-			
-		def __repr__(self):
-			return '<character>'
-
-	class Ego(Character):
-		pass
 
 	class Grammar(list):
 		def __init__(self, rules):

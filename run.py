@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import tty, termios, sys
-from dungeontalk import DM
+from DM import DM
 
 class Terminal:
 	def __init__(self, filename=None):
@@ -15,6 +15,10 @@ class Terminal:
 				self.interp.read(self.source)
 		"""
 
+	def test(self):
+
+		self.interp.test()
+
 	def begin(self):
 
 		"""
@@ -22,7 +26,7 @@ class Terminal:
 			self.interp.load();
 		"""
 
-		self.interp.read('test2.dtk', is_file=True)
+		self.interp.read('game_script.dtk', is_file=True)
 
 
 		while True:
@@ -52,8 +56,8 @@ class Terminal:
 			return ch
    
 T = Terminal()
-T.begin()
-
+#T.begin()
+T.test()
 
 
 """

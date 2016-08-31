@@ -125,34 +125,6 @@ class Interpreter(object):
 			i = i.word
 		return self.scope().get(i, None)
 	
-	def push_scope(self, namespace={}):
-		"""
-		Open a scope
-		"""
-		scp = namespace.copy()
-		scp.update(self.scope())
-		self.memory.scope.append(scp)
-	
-	def pull_scope(self):
-		"""
-		Remove a scope
-		"""
-		return self.memory.scope.pop()
-
-	# absolute addressing
-	def goto(self, n):
-		"""
-		Goto absolute address
-		"""
-		self.pntr = n;
-	
-	# relative addressing
-	def move(self, i):
-		"""
-		Move interpreter instruction pointer. Relative address from current pointer position
-		"""
-		self.pntr += i
-	
 	def call(self, routine, arguments):
 		"""
 		Handle procedure calls
@@ -170,7 +142,7 @@ class Interpreter(object):
 		if len(signature) != len(arguments):
 			raise Exception('Function expects %s arguments. Given %s' % (len(signature), len(arguments)))
 		
-		self.push_scope()
+		self._push_scope()
 		
 		if len(signature) > 0:
 			# assign calling args to routine signature
@@ -186,8 +158,8 @@ class Interpreter(object):
 		# is procedure. Return nothing. Move instruction pointer
 		else:
 			# push return address to stack
-			self.stack_push({'ret_addr': self.pntr})
-			self.goto(address)
+			self._stack_push({'ret_addr': self.pntr})
+			self._goto(address)
 		
 		
 	def endcall(self):
@@ -197,16 +169,16 @@ class Interpreter(object):
 		ret_addr = None
 		
 		if len(self.memory.stack) > 0:
-			stack = self.stack_pull()
+			stack = self._stack_pull()
 			ret_addr = stack.get('ret_addr', None)
 		
 		self.endblock()
-		self.pull_scope()
+		self._pull_scope()
 				
 		if ret_addr is None:
 			return
 		
-		self.goto(ret_addr)	
+		self._goto(ret_addr)	
 	
 	
 	def endblock(self):
@@ -244,13 +216,7 @@ class Interpreter(object):
 	
 	def stack(self):
 		return self.memory.stack[-1]
-	
-	def stack_push(self, v):
-		self.memory.stack.append(v)
-	
-	def stack_pull(self):
-		return self.memory.stack.pop()
-	
+
 	def is_read_enabled(self):
 		"""
 		Returns whether the interpreter is set to execute instructions or to ignore them 
@@ -283,6 +249,41 @@ class Interpreter(object):
 		"""
 		return self.ctrl_stack.pop()
 	
+	def _stack_push(self, v):
+		self.memory.stack.append(v)
+	
+	def _stack_pull(self):
+		return self.memory.stack.pop()
+
+	def _push_scope(self, namespace={}):
+		"""
+		Open a scope
+		"""
+		scp = namespace.copy()
+		scp.update(self.scope())
+		self.memory.scope.append(scp)
+	
+	def _pull_scope(self):
+		"""
+		Remove a scope
+		"""
+		return self.memory.scope.pop()
+
+	# absolute addressing
+	def _goto(self, n):
+		"""
+		Goto absolute address
+		"""
+		self.pntr = n;
+	
+	# relative addressing
+	def _move(self, i):
+		"""
+		Move interpreter instruction pointer. Relative address from current pointer position
+		"""
+		self.pntr += i
+	
+
 	"""
 	Eval variables, lists. Handle references
 	"""

@@ -260,7 +260,7 @@ class Parser(object):
 			self.count += 1
 			return self.expression()
 		elif isinstance(lexeme, (self.lang.Parameter)):
-			raise Exception('Misplaced parameter')
+			raise Exception("Misplaced parameter %s %s" % (lexeme.type(), lexeme.word))
 		else:
 			# newline, tab & beyond
 			return self.parse(until=until)
