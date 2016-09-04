@@ -1,3 +1,5 @@
+from copy import copy, deepcopy
+
 class Vertex(object):
 
 	def get_id(self):
@@ -20,14 +22,7 @@ class Vertex(object):
 		return self.outbound
 
 	def get_neighbours(self):
-		edges = self.inbound.copy()
-		edges.update(self.outbound)
-
-		
-
-		#return [dict(t) for t in set([tuple(v) for k,v in edges.items()])]
-
-		#return [dict(t) for t in set([tuple(edges.items())])]
+		return [edge.get_head() for id,edge in self.outbound.items()]
 
 	def __init__(self, identifier=None):
 		self.undirected = {}
@@ -41,17 +36,25 @@ class Vertex(object):
 
 class Edge(object):
 
+	@staticmethod
+	def invert(edge):
+		iedge = deepcopy(edge)
+		return iedge.set_tail(edge.get_head()).set_head(edge.get_tail())
+
 	def get_id(self):
 		return self.id
 
 	def set_tail(self, vertex):
 		self.tail = vertex
+		return self
 
 	def set_head(self, vertex):
 		self.head = vertex
+		return self
 
 	def set_weight(self, weight):
 		self.weight = weight
+		return self
 
 	def get_head(self):
 		return self.head
@@ -62,6 +65,9 @@ class Edge(object):
 	def get_vertices(self):
 		return self.tail, self.head
 	
+	def get_weight(self):
+		return self.weight
+
 	def __init__(self, identifier=None, tail=None, head=None, weight=None, is_directed=True):
 		self.id = identifier or id(self)
 		self.is_directed = is_directed
@@ -70,57 +76,124 @@ class Edge(object):
 		self.set_weight(weight)
 
 	def __repr__(self):
-		return '<%s-%s>' % (self.tail.id, self.head.id)
+		return '<(%s)%s-%s>' % ('d' if self.is_directed else 'u', self.tail.id, self.head.id)
 
-class MultiDigraph(object):
+
+class VertexCollectionMixin(object):
 
 	def add_vertex(self, vertex):
 		self.vertices[vertex.get_id()] = vertex
+		return self
 
 	def add_vertices(self, vertices):
 
-		vertices = vertices if isinstance(vertices, list) else [vertices]
-
-		for v in vertices:
+		for v in vertices if isinstance(vertices, list) else [vertices]:
 			self.add_vertex(v)
 
-	def get_incidence_table(self):
+		return self
 
-		table = {}
+	def get_vertices(self):
+		return self.vertices
 
-		for id, vertex in self.vertices.items():
-			
-			print vertex.get_neighbours()
+	def get_vertex(self, identifier):
+		v = self.vertices.get(identifier, None)
 
-			#neighbours = vertex.get_outbound_edges
+		if v is None:
+			raise VertexNotFound();
 
-	def get_path(self, begin, end, path=[]):
+		return v
 
-		"""
-		if begin != end:
-			
-			if begin in self.vertices:
-				path.append(self.vertices[begin])
-		"""
-
-		print self.get_incidence_table()
+	def __init__(self, vertices=[]):
+		self.vertices = {}
+		self.add_vertices(vertices)
 
 
-		return path
+class Path(VertexCollectionMixin):
+
+	def __repr__(self):
+		return "<path %s>" % (','.join(self.vertices))
+		
+
+
+class MultiDigraph(VertexCollectionMixin):
+
+	def get_adjacency_matrix(self):
+		return self.adjacency_matrix
+
+	def compute_adjacency_matrix(self):
+		return {vertex.get_id(): vertex.get_neighbours() for id, vertex in self.get_vertices().items()}
+
+	def update_adjacency_matrix(self):
+		self.adjacency_matrix = self.compute_adjacency_matrix()
+
+	def get_path(self, begin, end, _path=[]):
+
+		path 	= copy(_path)
+		routes 	= []
+		path.append(begin)
+		
+		for vertex in [vertex.get_id() for vertex in self.adjacency_matrix[begin] if vertex.get_id() not in path]:
+
+			if vertex == end:
+				path.append(end)
+				return path
+				#return Path(path) 
+
+			solution_path = self.get_path(vertex, end, path)
+
+			if solution_path is not None:
+				routes.append(solution_path)
+
+		return routes if len(routes) > 0 else None
+
 
 	def connect(self, tail, head, edge):
 
-		edge.set_head(head)
 		edge.set_tail(tail)
-
+		edge.set_head(head)
+		
 		if edge.is_directed:
 			tail.add_outbound_edge(edge)
 			head.add_inbound_edge(edge)
 		else:
 			tail.add_undirected_edge(edge)
-			head.add_undirected_edge(edge)
+			head.add_undirected_edge(Edge.invert(edge))
 
 		self.add_vertices([tail, head])
 
-	def __init__(self):
-		self.vertices = {}
+		
+
+
+
+"""
+def breadth_first_search(self):
+	if not isinstance(begin, Vertex):
+		begin = self.get_vertex(begin)
+
+	expand 	= [begin]
+	visited = {begin.get_id(): True}
+	path 	= [begin]
+	path 	= []
+	routes 	= []
+	
+	while(len(expand) > 0):
+
+		current = self.get_vertex(expand.pop().get_id())
+
+		path.append(current)
+
+		if current.get_id() == end:
+			routes.append(path)
+			path = []
+			expand = [begin]
+			continue
+		
+		for vertex in current.get_neighbours():
+
+			if visited.get(vertex.get_id(), None) is None:
+				expand.append(vertex)
+				visited[vertex.get_id()] = True
+
+
+	print routes
+"""

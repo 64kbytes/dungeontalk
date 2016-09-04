@@ -11,4 +11,8 @@ class DM(Interpreter):
 		self.city = Dungeon()
 
 	def test(self):
-		print self.city.get_path('Bar', 'Airport')
+		routes = self.city.get_path('Bar', 'Safehouse');
+
+		print routes
+
+		#print self.city.get_vertex('Train Station').get_outbound_edges()
