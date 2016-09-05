@@ -22,7 +22,7 @@ class Vertex(object):
 		return self.outbound
 
 	def get_neighbours(self):
-		return [edge.get_head() for id,edge in self.outbound.items()]
+		return [(edge, edge.get_head()) for id,edge in self.outbound.items()]
 
 	def __init__(self, identifier=None):
 		self.undirected = {}
@@ -79,7 +79,22 @@ class Edge(object):
 		return '<(%s)%s-%s>' % ('d' if self.is_directed else 'u', self.tail.id, self.head.id)
 
 
-class VertexCollectionMixin(object):
+class Path(object):
+
+	def get_length(self):
+
+		for v in self.vertices:
+			print v.get_outbound_edges()
+
+	def __init__(self, vertices=[], edges=[]):
+		self.vertices = vertices
+		self.edges = edges
+
+	def __repr__(self):
+		return "<path %s>" % (','.join([str(vertex) for vertex in self.vertices]))
+		
+
+class MultiDigraph(object):
 
 	def add_vertex(self, vertex):
 		self.vertices[vertex.get_id()] = vertex
@@ -92,7 +107,11 @@ class VertexCollectionMixin(object):
 
 		return self
 
-	def get_vertices(self):
+	def get_vertices(self, id_list=[]):
+		
+		if len(id_list) > 0:
+			return [self.get_vertex(id) for id in id_list]
+
 		return self.vertices
 
 	def get_vertex(self, identifier):
@@ -103,20 +122,6 @@ class VertexCollectionMixin(object):
 
 		return v
 
-	def __init__(self, vertices=[]):
-		self.vertices = {}
-		self.add_vertices(vertices)
-
-
-class Path(VertexCollectionMixin):
-
-	def __repr__(self):
-		return "<path %s>" % (','.join(self.vertices))
-		
-
-
-class MultiDigraph(VertexCollectionMixin):
-
 	def get_adjacency_matrix(self):
 		return self.adjacency_matrix
 
@@ -126,25 +131,46 @@ class MultiDigraph(VertexCollectionMixin):
 	def update_adjacency_matrix(self):
 		self.adjacency_matrix = self.compute_adjacency_matrix()
 
-	def get_path(self, begin, end, _path=[]):
+	def _find_path(self, begin, end, _path=[]):
 
 		path 	= copy(_path)
 		routes 	= []
 		path.append(begin)
 		
-		for vertex in [vertex.get_id() for vertex in self.adjacency_matrix[begin] if vertex.get_id() not in path]:
+		for vertex in [vertex.get_id() for edge, vertex in self.adjacency_matrix[begin] if vertex.get_id() not in path]:
 
 			if vertex == end:
 				path.append(end)
-				return path
-				#return Path(path) 
+				return [Path(self.get_vertices(path))] 
 
-			solution_path = self.get_path(vertex, end, path)
+			solution_path = self._find_path(vertex, end, path)
 
-			if solution_path is not None:
+			if len(solution_path) > 0:
 				routes.append(solution_path)
 
-		return routes if len(routes) > 0 else None
+		return routes
+
+	def _unnest(self, haystack, needle):
+
+		if not isinstance(haystack, list):
+			raise TypeError()
+
+		paths = []
+
+		while(haystack):
+
+			current = haystack.pop()
+
+			if isinstance(current, needle):
+				paths.append(current)
+			else:
+				for i in current:
+					haystack.append(i)
+
+		return paths
+
+	def get_path(self, begin, end):
+		return self._unnest(self._find_path(begin, end), Path)
 
 
 	def connect(self, tail, head, edge):
@@ -160,6 +186,10 @@ class MultiDigraph(VertexCollectionMixin):
 			head.add_undirected_edge(Edge.invert(edge))
 
 		self.add_vertices([tail, head])
+
+	def __init__(self, vertices=[]):
+		self.vertices = {}
+		self.add_vertices(vertices)
 
 		
 

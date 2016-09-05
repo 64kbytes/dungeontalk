@@ -15,4 +15,6 @@ class DM(Interpreter):
 
 		print routes
 
+		print routes[0].get_length()
+
 		#print self.city.get_vertex('Train Station').get_outbound_edges()
