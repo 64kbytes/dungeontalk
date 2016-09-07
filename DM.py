@@ -13,8 +13,8 @@ class DM(Interpreter):
 	def test(self):
 		routes = self.city.get_path('Bar', 'Safehouse');
 
-		print routes
+		for r in routes:
+			print r.get_length()
 
-		print routes[0].get_length()
-
+		
 		#print self.city.get_vertex('Train Station').get_outbound_edges()

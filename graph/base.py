@@ -82,16 +82,14 @@ class Edge(object):
 class Path(object):
 
 	def get_length(self):
+		pass
+		
 
-		for v in self.vertices:
-			print v.get_outbound_edges()
-
-	def __init__(self, vertices=[], edges=[]):
-		self.vertices = vertices
+	def __init__(self, edges=[]):
 		self.edges = edges
 
 	def __repr__(self):
-		return "<path %s>" % (','.join([str(vertex) for vertex in self.vertices]))
+		return "<path %s>" % (','.join([str(edge) for edge in self.edges]))
 		
 
 class MultiDigraph(object):
@@ -131,19 +129,31 @@ class MultiDigraph(object):
 	def update_adjacency_matrix(self):
 		self.adjacency_matrix = self.compute_adjacency_matrix()
 
-	def _find_path(self, begin, end, _path=[]):
+	def _find_path(self, begin, end, _from_edge=None, _path=[]):
+		"""
+		Search depth-first recursively all paths leading from start to to end
+		Kind of messy. Can be improved
+		"""
 
-		path 	= copy(_path)
-		routes 	= []
-		path.append(begin)
+		# accept vertices or IDs
+		if isinstance(begin, Vertex):
+			begin = begin.get_id()
+
+		if isinstance(end, Vertex):
+			end = end.get_id()
+
+		routes 		= []
+		path 		= copy(_path)
+		from_edge 	= copy(_from_edge)
+		path.append((from_edge, begin))
 		
-		for vertex in [vertex.get_id() for edge, vertex in self.adjacency_matrix[begin] if vertex.get_id() not in path]:
+		for (edge, vertex) in [(edge, vertex.get_id()) for (edge, vertex) in self.adjacency_matrix[begin] if vertex.get_id() not in [p for e,p in path]]:
 
 			if vertex == end:
-				path.append(end)
-				return [Path(self.get_vertices(path))] 
+				path.append((edge, end))
+				return [Path(edges=[e for e,v in path if e is not None])] 
 
-			solution_path = self._find_path(vertex, end, path)
+			solution_path = self._find_path(vertex, end, edge, path)
 
 			if len(solution_path) > 0:
 				routes.append(solution_path)

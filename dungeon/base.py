@@ -54,8 +54,3 @@ class Dungeon(MultiDigraph):
 		self.connect(waterworks, park, Route(is_directed=True))#
 
 		self.update_adjacency_matrix()
-
-		print self.adjacency_matrix
-		print 80*'-'
-
-
