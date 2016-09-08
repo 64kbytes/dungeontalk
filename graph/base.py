@@ -66,7 +66,7 @@ class Edge(object):
 		return self.tail, self.head
 	
 	def get_weight(self):
-		return self.weight
+		return self.weight or 1
 
 	def __init__(self, identifier=None, tail=None, head=None, weight=None, is_directed=True):
 		self.id = identifier or id(self)
@@ -82,9 +82,8 @@ class Edge(object):
 class Path(object):
 
 	def get_length(self):
-		pass
+		return sum([edge.get_weight() for edge in self.edges])
 		
-
 	def __init__(self, edges=[]):
 		self.edges = edges
 
