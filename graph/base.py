@@ -86,6 +86,18 @@ class Path(object):
 		
 	def __init__(self, edges=[]):
 		self.edges = edges
+		self.i = 0
+
+	def __iter__(self):
+		return self
+
+	def next(self):
+		if self.i < len(self.edges):
+			i = self.i
+			self.i += 1
+			return self.edges[i]
+		else:
+			raise StopIteration()
 
 	def __repr__(self):
 		return "<path %s>" % (','.join([str(edge) for edge in self.edges]))

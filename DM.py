@@ -2,7 +2,6 @@ from dungeontalk.core.interp import Interpreter
 from dungeontalk import DungeonTalk
 from dungeon import Dungeon, Room, Route
 from character import Character
-#from fake import Factory
 
 class DM(Interpreter):
 	lang = DungeonTalk()
@@ -54,21 +53,29 @@ class DM(Interpreter):
 
 	def init_cast(self):
 
-		#fake = Factory.create()
+		
+		self.cast = []
 
-		#print fake
+		self.cast.append(Character())
 
+		print self.cast
+		"""
 		import pip
 		installed_packages = pip.get_installed_distributions()
 		installed_packages_list = sorted(["%s==%s" % (i.key, i.version) for i in installed_packages])
 		print(installed_packages_list)
+		"""
 
 	
 	def test(self):
 		routes = self.city.get_path('Bar', 'Safehouse');
 
-		for r in routes:
-			print r.get_length()
+
+		for r in routes[0]:
+			print r
+
+		#for r in routes:
+		#	print r.get_length()
 	
 		#print self.city.get_vertex('Train Station').get_outbound_edges()
 

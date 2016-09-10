@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import tty, termios, sys
 from DM import DM
 
