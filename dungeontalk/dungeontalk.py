@@ -37,7 +37,6 @@ class DungeonTalk(Lang):
 	class Ego(Character):
 		pass
 
-
 	
 	class Until(Lang.Parameter):
 				

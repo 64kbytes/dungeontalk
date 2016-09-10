@@ -1,6 +1,11 @@
 from copy import copy, deepcopy
+import exc
 
 class Vertex(object):
+
+	def set_graph(self, graph):
+		self.graph = graph
+		return self
 
 	def get_id(self):
 		return self.id
@@ -31,7 +36,7 @@ class Vertex(object):
 		self.id = identifier or id(self)
 
 	def __repr__(self):
-		return '<%s>' % (self.id)
+		return '<%s, %s>' % (self.id, self.graph)
 
 
 class Edge(object):
@@ -106,6 +111,7 @@ class Path(object):
 class MultiDigraph(object):
 
 	def add_vertex(self, vertex):
+		vertex.set_graph(self)
 		self.vertices[vertex.get_id()] = vertex
 		return self
 
@@ -127,7 +133,7 @@ class MultiDigraph(object):
 		v = self.vertices.get(identifier, None)
 
 		if v is None:
-			raise VertexNotFound();
+			raise exc.VertexNotFound("'%s' not found" % (identifier));
 
 		return v
 

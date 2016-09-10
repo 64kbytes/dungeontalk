@@ -2,9 +2,37 @@ from dungeontalk.core.interp import Interpreter
 from dungeontalk import DungeonTalk
 from dungeon import Dungeon, Room, Route
 from character import Character
+from rand import *
+import collections
 
 class DM(Interpreter):
 	lang = DungeonTalk()
+
+	class Brief(object):
+		def __init__(self, *args, **kwargs):
+			for k,v in kwargs.items():
+				setattr(self, k, v)
+
+	class Narrator(object):
+
+		def __init__(self, dm):
+			self.dm 	= dm
+			self.ego 	= dm.get_ego()
+			self.room 	= self.ego.get_location()
+
+		def get_brief(self):
+			return "%s\n%s\n%s\n" % (self.which_turn(), self.where_is(), self.where_can_go())
+
+		def which_turn(self):
+			return "TURN %s\n" % (self.dm.get_turn())
+
+		def where_is(self):
+			return "You are in %s." % (self.room.get_id())
+
+		def where_can_go(self):
+
+			exits = [room[1].get_id() for room in self.room.get_neighbours()]
+			return "You can go:\n\t%s" % ('\n\t'.join(exits))
 
 	def init_world(self):
 
@@ -53,37 +81,106 @@ class DM(Interpreter):
 
 	def init_cast(self):
 
+		self.cast = [Character(), Character(), Character()]
+		self.spawn(self.cast)
+		self.ego = choice(self.cast)
+		self.ego.set_as_ego()
+
+	def get_turn(self):
+		return self.turn
+
+	def get_brief(self):
+
+		narrator = DM.Narrator(dm=self)
 		
-		self.cast = []
+		return DM.Brief(ego=self.get_ego(), room=self.get_ego().get_location(), description=narrator.get_brief())
 
-		self.cast.append(Character())
+	def get_ego(self):
+		return self.ego
 
-		print self.cast
-		"""
-		import pip
-		installed_packages = pip.get_installed_distributions()
-		installed_packages_list = sorted(["%s==%s" % (i.key, i.version) for i in installed_packages])
-		print(installed_packages_list)
-		"""
+	def spawn(self, characters):
 
+		for c in characters:
+			c.set_location(self.city.get_place(choice([
+				'Bar',
+				'Train Station',
+				'Brandenburg Gate',
+				'Autobahn',
+				'Park',
+				'Waterworks',
+				'Underground',
+				'Hotel',
+				'Embassy',
+				'Dark Alley',
+				'Docks',
+				'Depot',
+				'Airport',
+				'Safehouse'
+			])))
+
+	def instruct_character(self, character, instructions):
+		pass
+
+	def roll_initiative(self):
 	
-	def test(self):
-		routes = self.city.get_path('Bar', 'Safehouse');
+		initiative_rolls = []
+		for character in self.cast:
 
+			dices = Roll([Dice(20)])
+			roll = dices.roll()
+			initiative_rolls.append((character, roll))
+		
+		# sort initiative
+		return sorted(initiative_rolls, key=lambda x: x[1], reverse=True)
 
-		for r in routes[0]:
-			print r
+	def play_turn(self):
+		
+		print 'Playing turn %s' % (self.turn)
+		print '-'*80
+		
+		print 'Roll initiative...'
+		initiative_rolls = self.roll_initiative()
 
-		#for r in routes:
-		#	print r.get_length()
-	
-		#print self.city.get_vertex('Train Station').get_outbound_edges()
+		for character,roll in initiative_rolls:
+			print "%s got %s" % (character.get_full_name(), roll)
+
+		print '\nActing...'
+
+		for character,roll in initiative_rolls:
+
+			print character.get_instructions() or 'Do nothing'
+
+		self.end_turn()
+
+	def end_turn(self):
+		self.turn += 1
+
+	def welcome(self):
+		print 'COLDWAR v0.1'
+		print '='*80
+
+	def submit(self, instruction):
+
+		if instruction == 'end turn':
+			self.play_turn()
+			return '-'*80 + '\n'
+		else:
+			self.ego.set_instruction(instruction)
 
 
 	def __init__(self, *args, **kwargs):
 		
 		super(DM, self).__init__(*args, **kwargs)
 
+		self.turn = 1
 		self.init_world()
 		self.init_cast()
+
+		self.welcome()
+
+		print 'These are the caracters...'
+		for c in self.cast:
+			c.get_identity()
+		print '-'*80
+		print 'Listening for instructions...' + '\n'
 	
