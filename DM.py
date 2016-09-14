@@ -3,7 +3,112 @@ from dungeontalk import DungeonTalk
 from dungeon import Dungeon, Room, Route
 from character import Character
 from rand import *
+from knowledge import Knowledge
 import collections
+
+class Turn(object):
+
+	def __iter__(self):
+		return self
+
+	def next(self):
+		if self.phasenum < len(self.phases):
+			self.phasenum += 1
+		else:
+			self.turn += 1
+			self.phasenum = 0
+
+		return self.get_phase()
+	
+	def get_turn(self):
+		return self.turn
+
+	def begin_phase(self):
+		self.phases[self.phasenum].begin()
+
+	def end_phase(self):
+		self.phases[self.phasenum].end()
+		self.next().begin()
+
+	def get_phase(self):
+		return self.phases[self.phasenum]
+
+	def __init__(self, phases):
+		self.phases 	= phases
+		self.phasenum 	= 0
+		self.turn 		= 0
+
+	def __repr__(self):
+		return str(self.phases)
+
+class Phase(object):
+
+	def __init__(self, dm):
+		self.dm = dm
+
+	def begin(self):
+		raise NotImplementedError()
+	
+	def play(self):
+		raise NotImplementedError()
+
+	def end(self):
+		raise NotImplementedError()
+
+class Planning(Phase):
+	def begin(self):
+		print 'BEGIN planning phase'
+	
+	def play(self):
+		print 'PLAY planning phase'
+
+	def end(self):
+		print 'END planning phase'
+
+class Execution(Phase):
+	def begin(self):
+		print 'BEGIN execution phase'
+	
+	def play(self):
+		print 'PLAY execution phase'
+
+	def end(self):
+		print 'END execution phase'
+
+class Adjust(Phase):
+	def begin(self):
+		print 'BEGIN adjust phase'
+	
+	def play(self):
+		print 'PLAY adjust phase'
+
+	def end(self):
+		print 'END adjust phase'
+
+class Review(Phase):
+	pass
+
+class Narrator(object):
+
+	def __init__(self, dm):
+		self.dm 	= dm
+		self.ego 	= dm.get_ego()
+		self.room 	= self.ego.get_location()
+
+	def get_brief(self):
+		return "%s\n%s\n%s\n" % (self.which_turn(), self.where_is(), self.where_can_go())
+
+	def which_turn(self):
+		return "TURN %s\n" % (self.dm.get_turn())
+
+	def where_is(self):
+		return "You are in %s." % (self.room.get_id())
+
+	def where_can_go(self):
+
+		exits = [room[1].get_id() for room in self.room.get_neighbours()]
+		return "You can go:\n\t%s" % ('\n\t'.join(exits))
+
 
 class DM(Interpreter):
 	lang = DungeonTalk()
@@ -13,26 +118,6 @@ class DM(Interpreter):
 			for k,v in kwargs.items():
 				setattr(self, k, v)
 
-	class Narrator(object):
-
-		def __init__(self, dm):
-			self.dm 	= dm
-			self.ego 	= dm.get_ego()
-			self.room 	= self.ego.get_location()
-
-		def get_brief(self):
-			return "%s\n%s\n%s\n" % (self.which_turn(), self.where_is(), self.where_can_go())
-
-		def which_turn(self):
-			return "TURN %s\n" % (self.dm.get_turn())
-
-		def where_is(self):
-			return "You are in %s." % (self.room.get_id())
-
-		def where_can_go(self):
-
-			exits = [room[1].get_id() for room in self.room.get_neighbours()]
-			return "You can go:\n\t%s" % ('\n\t'.join(exits))
 
 	def init_world(self):
 
@@ -86,12 +171,17 @@ class DM(Interpreter):
 		self.ego = choice(self.cast)
 		self.ego.set_as_ego()
 
+		for i in self.cast:
+			self.knowledge.record("%s SPAWN %s" % (self.turn.get_turn(), i.get_id()))
+
+		print self.knowledge
+
 	def get_turn(self):
-		return self.turn
+		return self.turn.get_turn()
 
 	def get_brief(self):
 
-		narrator = DM.Narrator(dm=self)
+		narrator = Narrator(dm=self)
 		
 		return DM.Brief(ego=self.get_ego(), room=self.get_ego().get_location(), description=narrator.get_brief())
 
@@ -135,7 +225,7 @@ class DM(Interpreter):
 
 	def play_turn(self):
 		
-		print 'Playing turn %s' % (self.turn)
+		print 'Playing turn %s' % (self.turn.get_turn())
 		print '-'*80
 		
 		print 'Roll initiative...'
@@ -147,13 +237,12 @@ class DM(Interpreter):
 		print '\nActing...'
 
 		for character,roll in initiative_rolls:
-
-			print character.get_instructions() or 'Do nothing'
+			print "%s %s" % (character.get_full_name(), character.get_instructions() or 'Do nothing')
 
 		self.end_turn()
 
 	def end_turn(self):
-		self.turn += 1
+		self.turn.next()
 
 	def welcome(self):
 		print 'COLDWAR v0.1'
@@ -172,9 +261,12 @@ class DM(Interpreter):
 		
 		super(DM, self).__init__(*args, **kwargs)
 
-		self.turn = 1
+		self.turn = Turn([Planning(self), Execution(self), Adjust(self), Review(self)])
+		self.knowledge = Knowledge()
+
 		self.init_world()
 		self.init_cast()
+		
 
 		self.welcome()
 

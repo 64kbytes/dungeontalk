@@ -1,3 +1,5 @@
+from knowledge import Knowledge
+
 class Automaton(object):
 	
 	def __init__(self, *args, **kwargs):

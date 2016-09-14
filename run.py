@@ -29,7 +29,7 @@ class Terminal:
 
 				instr = raw_input('%s $ >>> ' % (brief.ego.get_full_name()))
 
-				if reply == 'quit':
+				if instr == 'quit':
 					break
 
 				reply = self.dm.submit(instr)

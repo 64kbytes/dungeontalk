@@ -1,5 +1,5 @@
 from faker import Factory as RandomCharacterFactory
-from knowledge import File
+from knowledge import Knowledge
 from ai import AI, Automaton
 
 class LocatableMixin(object):

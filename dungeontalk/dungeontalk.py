@@ -26,10 +26,8 @@ class DungeonTalk(Lang):
 
 
 	# entity
-	class GameObject():
-		pass
 
-	class Character(Lang.Identifier, GameObject):
+	class Character(Lang.Identifier):
 			
 		def __repr__(self):
 			return '<character>'
