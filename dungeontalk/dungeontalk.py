@@ -12,6 +12,7 @@ class DungeonTalk(Lang):
 		super(DungeonTalk, self).__init__(*args, **kwargs)
 
 		DungeonTalk.bind_keyword('WAIT', DungeonTalk.Wait)
+		DungeonTalk.bind_keyword('GO', DungeonTalk.Go)
 
 		DungeonTalk.bind_symbol(DungeonTalk.r_atsign, {
 			Lang.r_identifier:	Lang.handler(DungeonTalk.Character),
@@ -71,7 +72,7 @@ class DungeonTalk(Lang):
 		
 		def eval(self, interp, expression):
 			print 'EYES ONLY %s' % (self.readers)
-			
+		
 	class Wait(Lang.Keyword):
 		
 		def type(self):
@@ -86,6 +87,22 @@ class DungeonTalk(Lang):
 			c = interp.eval(self.condition)
 			u = interp.eval(self.until)
 			print "WAITING %s UNTIL %s" % (c, u)
+
+	class Go(Lang.Keyword):
+		
+		def type(self):
+			return '<go>'
+		
+		def parse(self, parser, **kwargs):
+			self.destination	= parser.build(parser.expression())
+			return [self, self.destination]
+		
+		def eval(self, interp, expression):
+			d = interp.eval(self.destination)
+			print "GO %s" % (d)
+
+			print interp
+
 
 	"""
 	class BuiltIn(Lang.Def):

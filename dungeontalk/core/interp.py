@@ -1,13 +1,16 @@
 from parser import Parser
-from lang import Lang
 
 OPERAND_L	= 0
 OPERATOR 	= 1
 OPERAND_R	= 2
 
 class Interpreter(object):
+	"""
+	Reads language and executes it, handling values stored in memory, etc
+	"""
 
-	lang = Lang()
+	# default generic language definition
+	#lang = Lang()
 	
 	class Snapshot(dict):
 		"""
@@ -33,23 +36,11 @@ class Interpreter(object):
 			# one-liner aligning with spaces
 			return '\n' + '\n'.join(['%s %s %s' % (k, ' ' * (16 - len(k)), v) for k,v in self.iteritems()])
 		
-	"""
-	Reads language and executes it, handling values stored in memory, etc
-	"""
 	class Memory(object):
 		def __init__(self):
 			self.instr 	= []
 			self.stack	= []
 			self.scope 	= [{}]
-
-	def __init__(self, source=None):
-		self.parser 		= Parser(self.lang, source)
-		self.lang			= self.parser.lang
-		self.memory			= Interpreter.Memory()
-		self.ctrl_stack		= [True]
-		self.block_stack	= ['<main>']
-		self.pntr 			= 0
-		self.last 			= None
 
 	def read(self, source, is_file=False):
 		"""
@@ -57,6 +48,7 @@ class Interpreter(object):
 		"""
 		self.parser.set_source(source, is_file)
 		self.load()
+		return self
 		
 	def load(self):
 		"""
@@ -86,13 +78,28 @@ class Interpreter(object):
 			self.last = r
 			
 		return r
+
+	def get_next_instruction(self):
+		try:	
+			return self.memory.instr[self.pntr]
+		except IndexError as err:
+			return False
+
+	def clear(self):
+		self.memory			= Interpreter.Memory()
+		self.ctrl_stack		= [True]
+		self.block_stack	= ['<main>']
+		self.pntr 			= 0
+		self.last 			= None
 	
 	def exec_next(self):
 		"""
 		Executes one line at a time
 		"""
 		try:
-			print Interpreter.Snapshot(self)
+			if self.debug:
+				print Interpreter.Snapshot(self)
+			
 			# eval the instructions	
 			r = self.eval(self.memory.instr[self.pntr])
 			self.last = r
@@ -359,3 +366,8 @@ class Interpreter(object):
 				
 		else:
 			return i
+
+	def __init__(self, lang):
+		self.lang 	= lang
+		self.parser = Parser(self.lang)
+		self.clear()

@@ -16,16 +16,6 @@ class Lexer(object):
 		def __repr__(self):
 			return "Token(line=(%s)%s, char=(%s)%s, word=(%s)'%s'" % (type(self.line), self.line, type(self.char), self.char, type(self.word), self.word)
 
-	def __init__(self, syntax, source, is_file=False):
-		self.src = open(source) if is_file else StringIO.StringIO(source)	
-		self.syntax	= syntax
-		self.token	= []
-		self.nline	= 0
-		self.nchar 	= 0
-	
-	def __exit__(self):
-		self.src.close()
-
 	def backtrack(self, n=1):
 		self.src.seek(-n, 1)
 		return self
@@ -130,3 +120,13 @@ class Lexer(object):
 			
 			# return a typed lexeme
 			return tree(token.word, (token.line, token.char))
+
+	def __init__(self, syntax, source, is_file=False):
+		self.src = open(source) if is_file else StringIO.StringIO(source)	
+		self.syntax	= syntax
+		self.token	= []
+		self.nline	= 0
+		self.nchar 	= 0
+	
+	def __exit__(self):
+		self.src.close()

@@ -1,3 +1,9 @@
+class FileSystem(object):
+	pass
+
+class Program(object):
+	pass
+	
 class Knowledge(object):
 	
 	def __iter__(self):

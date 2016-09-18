@@ -47,6 +47,7 @@ class Character(Automaton, LocatableMixin):
 		return self.identity.get_full_name()
 
 	def get_identity(self):
+		# clean this
 		id = self.identity
 		if self.is_ego:
 			print "YOU are %s %s, and you are in %s" % (id.first_name, id.last_name, self.get_location().id)

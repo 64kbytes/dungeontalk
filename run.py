@@ -1,5 +1,5 @@
 import tty, termios, sys
-from DM import DM
+from dm import DM
 
 class Terminal:
 
@@ -19,15 +19,17 @@ class Terminal:
 	
 	def play(self):
 
-		while True:
+		self.dm.begin_game()
 
-			try:
+		try:
+
+			while True:
 
 				brief = self.dm.get_brief()
 				
 				print brief.description
 
-				instr = raw_input('%s $ >>> ' % (brief.ego.get_full_name()))
+				instr = raw_input('%s $ >>> ' % (brief.ego.get_full_name())).strip()
 
 				if instr == 'quit':
 					break
@@ -36,9 +38,10 @@ class Terminal:
 
 				print reply
 
-			except KeyboardInterrupt:
-				print 'EXIT'
-				break
+		except KeyboardInterrupt:
+			print '\nOk, exiting...'
+		finally:
+			self.dm.end_game()
 
 	def __init__(self):
 		self.dm = DM()

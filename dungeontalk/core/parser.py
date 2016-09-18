@@ -4,18 +4,7 @@ class Parser(object):
 	"""
 	The parser
 	"""
-		
-	def __init__(self, lang, source, is_file=False):
-		self.count		= 0
-		self.lang		= lang
-		self.lexer 		= Lexer(lang, source, is_file)
-		self.tree 		= []
-		self.pending	= []
-		self.blocks		= ['<main>']
-	
-	def set_source(self, source, is_file=False):
-		self.lexer = Lexer(self.lang, source, is_file)
-	
+
 	def EOF(self):
 		if len(self.blocks) > 1:
 			pass
@@ -264,9 +253,7 @@ class Parser(object):
 		else:
 			# newline, tab & beyond
 			return self.parse(until=until)
-		
-		
-	
+			
 	def build(self, s):
 		
 		# n as the node we are building
@@ -317,3 +304,16 @@ class Parser(object):
 				n.append(i)
 				
 		return n
+
+	def set_source(self, source, is_file=False):
+		self.lexer = Lexer(self.lang, source, is_file)
+
+	def __init__(self, lang, source=None, is_file=False):
+		self.count		= 0
+		self.lang		= lang
+		self.tree 		= []
+		self.pending	= []
+		self.blocks		= ['<main>']
+
+		if source is not None:
+			self.set_source(source, is_file)
