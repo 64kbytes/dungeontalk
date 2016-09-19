@@ -1,6 +1,5 @@
 from faker import Factory as RandomCharacterFactory
-from knowledge import Knowledge
-from ai import AI, Automaton
+from ai import AI, Automaton, Knowledge
 
 class LocatableMixin(object):
 	def set_location(self, room):
@@ -21,7 +20,6 @@ class Identity(object):
 			self.last_name 		= random.last_name()
 			self.birth_country 	= random.country()
 
-
 	def get_full_name(self):
 		return "%s %s" % (self.first_name, self.last_name)
 
@@ -37,11 +35,11 @@ class Character(Automaton, LocatableMixin):
 		self.identity 	= Identity(is_true=True)
 		self.inventory 	= []
 
-	def set_as_ego(self):
-		self.is_ego = True
-
 	def get_id(self):
 		return self.id
+
+	def set_as_ego(self):
+		self.is_ego = True
 
 	def get_full_name(self):
 		return self.identity.get_full_name()

@@ -93,8 +93,6 @@ class Lang(object):
 		'def':			lambda w,t: Lang.Def(w,t),
 		'exec':			lambda w,t: Lang.Exec(w,t),
 		'include':		lambda w,t: Lang.Include(w,t),
-		#'WAIT':		lambda w,t: Lang.Wait(w,t),
-		#'FAILSAFE':	lambda w,t: Lang.Failsafe(w,t)
 	}
 	
 	parameters = {
@@ -103,14 +101,7 @@ class Lang(object):
 		#'TUNE':		lambda w,t: Lang.Tune(w,t),
 	}
 	
-	bindings = {
-		#'TAILED': None
-	}
-	
-	builtins = {
-		#'TAILED':		lambda w,t: Lang.Tailed(w,t,Lang.bindings[w])
-	}
-	
+	# A clause is a keyword acting as a parameter for another keyword 
 	clause = {
 		r'<parameter>':	lambda: Lang.expression
 	}
@@ -118,10 +109,10 @@ class Lang(object):
 	expression = {
 		r'<unary-op>': lambda: Lang.expression,
 		r'<delim>|<bracket>': lambda: Lang.expression,
-		r'<const>|<ident>|<built-in>': {
-			r'<bracket>|<const>|<ident>|<built-in>': lambda: Lang.expression[r'<const>|<ident>|<built-in>'],
+		r'<const>|<ident>': {
+			r'<bracket>|<const>|<ident>': lambda: Lang.expression[r'<const>|<ident>'],
 			'<op>': lambda: Lang.expression,
-			'</delim>|</bracket>': lambda: Lang.expression[r'<const>|<ident>|<built-in>'],
+			'</delim>|</bracket>': lambda: Lang.expression[r'<const>|<ident>'],
 			'<comma>': lambda: Lang.expression
 		}
 	}
@@ -130,8 +121,6 @@ class Lang(object):
 	def identifier(w,t):
 		if w in Lang.keywords:
 			return Lang.keywords[w](w,t)
-		elif w in Lang.builtins:
-			return Lang.builtins[w](w,t)
 		elif w in Lang.parameters:
 			return Lang.parameters[w](w,t)
 		else:
@@ -436,7 +425,7 @@ class Lang(object):
 			return '<procedure>'
 		
 		def parse(self, parser, **kwargs):	
-			print 'Procedure is being parsed'
+			#print 'Procedure is being parsed'
 
 			# parse identifier
 			i = parser.next()
@@ -455,7 +444,7 @@ class Lang(object):
 			return [self, self.identifier, self.signature]
 		
 		def eval(self, interp, signature):
-			print "Procedure is being eval'd"
+			#print "Procedure is being eval'd"
 
 			# store procedure address
 			self.address = interp.pntr
@@ -467,7 +456,7 @@ class Lang(object):
 			interp.bind(self.identifier.word, self)
 			
 			# skip function block. We are just declaring the function		
-			interp.move(self.length+1)
+			interp._move(self.length+1)
 		
 		def call(self):
 			return interp.call(self, arguments)
@@ -586,10 +575,10 @@ class Lang(object):
 			if isinstance(block, Lang.If):
 				interp.endif()
 			elif isinstance(block, Lang.Procedure):
-				print 'Ending procedure block'
+				#print 'Ending procedure block'
 				interp.endcall()
 			elif isinstance(block, Lang.Def):
-				print 'Ending def block'
+				#print 'Ending def block'
 				interp.endcall()
 			else:
 				print interp.block_stack

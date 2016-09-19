@@ -1,6 +1,10 @@
-from core.lang import Lang
+from core import Lang, Interpreter
 
 class DungeonTalk(Lang):
+	pass
+
+
+class DoubleTalk(Lang):
 	"""
 		Define game specific language constructs
 	"""
@@ -9,21 +13,21 @@ class DungeonTalk(Lang):
 	r_atsign		= r'[@]'
 
 	def __init__(self, *args, **kwargs):
-		super(DungeonTalk, self).__init__(*args, **kwargs)
+		super(DoubleTalk, self).__init__(*args, **kwargs)
 
-		DungeonTalk.bind_keyword('WAIT', DungeonTalk.Wait)
-		DungeonTalk.bind_keyword('GO', DungeonTalk.Go)
+		DoubleTalk.bind_keyword('WAIT', DoubleTalk.Wait)
+		DoubleTalk.bind_keyword('GO', DoubleTalk.Go)
 
-		DungeonTalk.bind_symbol(DungeonTalk.r_atsign, {
-			Lang.r_identifier:	Lang.handler(DungeonTalk.Character),
-			None: 				Lang.handler(DungeonTalk.Ego)
+		DoubleTalk.bind_symbol(DoubleTalk.r_atsign, {
+			Lang.r_identifier:	Lang.handler(DoubleTalk.Character),
+			None: 				Lang.handler(DoubleTalk.Ego)
 		})
 
-		DungeonTalk.bind_keyword('EYES_ONLY', DungeonTalk.EyesOnly)
-		DungeonTalk.bind_keyword('UNTIL', DungeonTalk.Until)
+		DoubleTalk.bind_keyword('EYES_ONLY', DoubleTalk.EyesOnly)
+		DoubleTalk.bind_keyword('UNTIL', DoubleTalk.Until)
 		
-		#DungeonTalk.bind_keyword('BY', DungeonTalk.By)
-		#DungeonTalk.bind_keyword('TUNE', DungeonTalk.Tune)
+		#DoubleTalk.bind_keyword('BY', DoubleTalk.By)
+		#DoubleTalk.bind_keyword('TUNE', DoubleTalk.Tune)
 
 
 	# entity
@@ -35,24 +39,18 @@ class DungeonTalk(Lang):
 
 	class Ego(Character):
 		pass
-
-	
-	class Until(Lang.Parameter):
-				
-		def __init__(self, *args, **kwargs):
-			super(DungeonTalk.Until, self).__init__(*args, **kwargs)
 		
 	"""	
 	class By(Lang.Parameter):
 		
 		def __init__(self, *args, **kwargs):
-			super(DungeonTalk.By, self).__init__(*args, **kwargs)
+			super(DoubleTalk.By, self).__init__(*args, **kwargs)
 		
 	
 	class Tune(Lang.Parameter):
 		
 		def __init__(self, *args, **kwargs):
-			super(DungeonTalk.Tune, self).__init__(*args, **kwargs)
+			super(DoubleTalk.Tune, self).__init__(*args, **kwargs)
 	"""
 
 	class EyesOnly(Lang.Keyword):
@@ -67,7 +65,7 @@ class DungeonTalk(Lang):
 			return [self, self.readers]
 
 			#self.condition	= parser.build(parser.expression())
-			#self.until		= parser.build(parser.clause(DungeonTalk.Until))
+			#self.until		= parser.build(parser.clause(DoubleTalk.Until))
 			#return [self, self.condition, self.until]
 		
 		def eval(self, interp, expression):
@@ -80,13 +78,19 @@ class DungeonTalk(Lang):
 		
 		def parse(self, parser, **kwargs):
 			self.condition	= parser.build(parser.expression())
-			self.until		= parser.build(parser.clause(DungeonTalk.Until))
+			self.until		= parser.build(parser.clause(DoubleTalk.Until))
 			return [self, self.condition, self.until]
 		
 		def eval(self, interp, expression):
 			c = interp.eval(self.condition)
 			u = interp.eval(self.until)
 			print "WAITING %s UNTIL %s" % (c, u)
+
+
+	class Until(Lang.Parameter):
+				
+		def __init__(self, *args, **kwargs):
+			super(DoubleTalk.Until, self).__init__(*args, **kwargs)
 
 	class Go(Lang.Keyword):
 		
@@ -100,8 +104,6 @@ class DungeonTalk(Lang):
 		def eval(self, interp, expression):
 			d = interp.eval(self.destination)
 			print "GO %s" % (d)
-
-			print interp
 
 
 	"""
@@ -117,5 +119,5 @@ class DungeonTalk(Lang):
 		def __init__(self, token, pos=(None,None), binding=None, **kwargs):
 			# function binding
 			self.bind = binding
-			super(DungeonTalk.Tailed, self).__init__(token,pos, **kwargs)	
+			super(DoubleTalk.Tailed, self).__init__(token,pos, **kwargs)	
 	"""

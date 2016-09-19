@@ -80,7 +80,7 @@ class Parser(object):
 				if isinstance(lexeme, self.lang.CommentLine):
 					# skips until newline
 					self.verbatim(self.lang.NewLine)
-					continue
+					return self.lang.NewLine(word='\n')
 				
 				if isinstance(lexeme, self.lang.CommentBlock):
 					# skips until closed comment block

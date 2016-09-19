@@ -1,1 +1,2 @@
-from base import *
+from automaton import *
+from knowledge import *

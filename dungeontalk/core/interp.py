@@ -11,36 +11,63 @@ class Interpreter(object):
 
 	# default generic language definition
 	#lang = Lang()
-	
-	class Snapshot(dict):
-		"""
-		Takes a snapshot of interpreter state. Print human-readable dump
-		"""
-		def __init__(self, *args, **kwargs):
-			
-			interp = args[0]
-	
-			d = {
-				'Pointer': 		interp.pntr,
-				'Block stack': 	interp.block_stack,
-				'Scope': 		interp.memory.scope,
-				'Stack': 		interp.memory.stack,
-				'Ctrl stack':	interp.ctrl_stack,
-				'Instruction':	interp.memory.instr[interp.pntr],
-				'Last result':	interp.last
-			}
-			
-			super(Interpreter.Snapshot, self).__init__(d, **kwargs)
-	
-		def __str__(self):
-			# one-liner aligning with spaces
-			return '\n' + '\n'.join(['%s %s %s' % (k, ' ' * (16 - len(k)), v) for k,v in self.iteritems()])
+
+	@staticmethod
+	class EOF:
+		pass
 		
 	class Memory(object):
+
 		def __init__(self):
 			self.instr 	= []
 			self.stack	= []
 			self.scope 	= [{}]
+
+		def get_current_scope(self):
+			return self.scope[-1]
+
+		def push_scope(self, namespace={}):
+			"""
+			Open a scope
+			"""
+			scp = namespace.copy()
+			scp.update(self.get_current_scope())
+			self.scope.append(scp)
+		
+		def pull_scope(self):
+			"""
+			Remove a scope
+			"""
+			return self.scope.pop()
+
+		def get_stack(self):
+			return self.stack
+
+		def get_stack_top(self):
+			return self.stack[-1]
+		
+		def stack_push(self, v):
+			self.stack.append(v)
+	
+		def stack_pull(self):
+			return self.stack.pop()
+
+		def get_instruction(self, address):
+			try:	
+				return self.instr[address]
+			except IndexError as err:
+				return False
+			
+		def push_instruction(self, instruction):
+			self.instr.append(instruction)
+			return self
+
+		def read(self, identifier):
+			return self.get_current_scope().get(identifier, None)
+
+		def write(self, identifier, value):
+			self.get_current_scope()[identifier] = value
+			return self
 
 	def read(self, source, is_file=False):
 		"""
@@ -66,7 +93,8 @@ class Interpreter(object):
 			gtree = self.parser.build(instr)
 			
 			# append to instruction memory block
-			self.memory.instr.append(gtree)
+			self.memory.push_instruction(gtree)
+			#self.memory.instr.append(gtree)
 
 		
 	def exec_all(self, source=[], build=True):
@@ -80,10 +108,7 @@ class Interpreter(object):
 		return r
 
 	def get_next_instruction(self):
-		try:	
-			return self.memory.instr[self.pntr]
-		except IndexError as err:
-			return False
+		return self.memory.get_instruction(address=self.pntr)
 
 	def clear(self):
 		self.memory			= Interpreter.Memory()
@@ -96,47 +121,45 @@ class Interpreter(object):
 		"""
 		Executes one line at a time
 		"""
-		try:
-			if self.debug:
-				print Interpreter.Snapshot(self)
-			
-			# eval the instructions	
-			r = self.eval(self.memory.instr[self.pntr])
-			self.last = r
+		
+		#if self.debug:
+		#	print Interpreter.Snapshot(self)
+		
+		instruction = self.memory.get_instruction(address=self.pntr)
 
-		except IndexError as ie:
-			return False
-			
+		if instruction is False:
+			return self.EOF()
+
+		# eval the instructions	
+		r = self.eval(instruction)
+		self.last = r
+	
 		self.pntr += 1
 		return r
 		
-	def scope(self):
-		"""
-		Current scope
-		"""
-		return self.memory.scope[-1]
-	
-	def bind(self, i, v):
+	def bind(self, identifier, value):
 		"""
 		Bind a variable with a value
 		"""
-		if isinstance(i, self.lang.Identifier):
-			i = i.word
-		self.scope()[i] = v
+		if isinstance(identifier, self.lang.Identifier):
+			identifier = identifier.word
+
+		self.memory.write(identifier, value)
 	
-	def fetch(self, i):
+	def fetch(self, identifier):
 		"""
 		Get a value from a variable in scope
 		"""
-		if isinstance(i, self.lang.Identifier):
-			i = i.word
-		return self.scope().get(i, None)
+		if isinstance(identifier, self.lang.Identifier):
+			identifier = identifier.word
+
+		return self.memory.read(identifier)
 	
 	def call(self, routine, arguments):
 		"""
 		Handle procedure calls
 		"""
-		print 'Calling routine %s' % (routine.get_identifier())
+		#print 'Calling routine %s' % (routine.get_identifier())
 
 		# push block
 		self.push_block(routine)
@@ -149,7 +172,7 @@ class Interpreter(object):
 		if len(signature) != len(arguments):
 			raise Exception('Function expects %s arguments. Given %s' % (len(signature), len(arguments)))
 		
-		self._push_scope()
+		self.memory.push_scope()
 		
 		if len(signature) > 0:
 			# assign calling args to routine signature
@@ -165,7 +188,7 @@ class Interpreter(object):
 		# is procedure. Return nothing. Move instruction pointer
 		else:
 			# push return address to stack
-			self._stack_push({'ret_addr': self.pntr})
+			self.memory.stack_push({'ret_addr': self.pntr})
 			self._goto(address)
 		
 		
@@ -176,11 +199,11 @@ class Interpreter(object):
 		ret_addr = None
 		
 		if len(self.memory.stack) > 0:
-			stack = self._stack_pull()
+			stack = self.memory.stack_pull()
 			ret_addr = stack.get('ret_addr', None)
 		
 		self.endblock()
-		self._pull_scope()
+		self.memory.pull_scope()
 				
 		if ret_addr is None:
 			return
@@ -221,9 +244,6 @@ class Interpreter(object):
 		"""
 		return self.block_stack.pop()
 	
-	def stack(self):
-		return self.memory.stack[-1]
-
 	def is_read_enabled(self):
 		"""
 		Returns whether the interpreter is set to execute instructions or to ignore them 
@@ -256,26 +276,6 @@ class Interpreter(object):
 		"""
 		return self.ctrl_stack.pop()
 	
-	def _stack_push(self, v):
-		self.memory.stack.append(v)
-	
-	def _stack_pull(self):
-		return self.memory.stack.pop()
-
-	def _push_scope(self, namespace={}):
-		"""
-		Open a scope
-		"""
-		scp = namespace.copy()
-		scp.update(self.scope())
-		self.memory.scope.append(scp)
-	
-	def _pull_scope(self):
-		"""
-		Remove a scope
-		"""
-		return self.memory.scope.pop()
-
 	# absolute addressing
 	def _goto(self, n):
 		"""
@@ -307,7 +307,7 @@ class Interpreter(object):
 				return i
 			# return value in memory
 			else:
-				return i.eval(self.scope())
+				return i.eval(self.memory.get_current_scope())
 		
 		# structs
 		elif isinstance(i, self.lang.Vector):
@@ -355,19 +355,45 @@ class Interpreter(object):
 			
 			# unary operation
 			if len(i) < 3:
-				return i.pop(0).eval(self.scope(), arguments=i.pop(0), interp=self)
+				return i.pop(0).eval(self.memory.get_current_scope(), arguments=i.pop(0), interp=self)
 			
 			# assign operations
 			if isinstance(i[OPERATOR], self.lang.Assign):
-				return i[OPERATOR].eval(i[OPERAND_L], self.getval(i[OPERAND_R]), self.scope())
+				return i[OPERATOR].eval(i[OPERAND_L], self.getval(i[OPERAND_R]), self.memory.get_current_scope())
 			# any other binary operation
 			else:
-				return i[OPERATOR].eval(self.getval(i[OPERAND_L]), self.getval(i[OPERAND_R]), self.scope())
+				return i[OPERATOR].eval(self.getval(i[OPERAND_L]), self.getval(i[OPERAND_R]), self.memory.get_current_scope())
 				
 		else:
 			return i
 
-	def __init__(self, lang):
+	class Snapshot(dict):
+		"""
+		Takes a snapshot of interpreter state. Print human-readable dump
+		"""
+		def __init__(self, *args, **kwargs):
+			
+			interp = args[0]
+	
+			d = {
+				'Pointer': 		interp.pntr,
+				'Block stack': 	interp.block_stack,
+				'Scope': 		interp.memory.scope,
+				'Stack': 		interp.memory.stack,
+				'Ctrl stack':	interp.ctrl_stack,
+				'Instruction':	interp.memory.instr[interp.pntr],
+				'Last result':	interp.last
+			}
+			
+			super(Interpreter.Snapshot, self).__init__(d, **kwargs)
+	
+		def __str__(self):
+			# one-liner aligning with spaces
+			return '\n' + '\n'.join(['%s %s %s' % (k, ' ' * (16 - len(k)), v) for k,v in self.iteritems()])
+
+
+	def __init__(self, lang, debug=False):
 		self.lang 	= lang
 		self.parser = Parser(self.lang)
+		self.debug 	= debug
 		self.clear()

@@ -1,0 +1,538 @@
+ACCESS AGENT – a talent spotter, performs reconnaissance for recruiters.
+ACORN – slang for someone who is performing an intelligence function.
+ACTION DIRECT – an underground group in France.
+AGENT – a person under the control of an intelligence agency or security service.
+AGENT-OF-INFLUENCE – a deep-cover agent with influence among the members of a target group.
+AGENT PROVOCATEUR – a deep-cover agent who feigns enthusiastic support while tempting the target to incriminate himself/herself through action or words .
+AIS – Argentina's intelligence agency.
+AL AMN AL-KHAS – Iraq's security service.
+AMAN – one of Israel's intelligence agencies.
+AMERIKA – underground metaphor for a fascist USA reminiscent of Nazi Germany.
+ANALYSIS – drawing conclusions about raw information by assessing its significance and by collating it with other information.
+ASALA – underground group in Armenia.
+ASIO – Australian Security Intelligence Organization.
+ASIS – Australian Secret Intelligence Service, a department of ASIO.
+ASSAULTER – a member of a SWAT team responsible for making a forced entry.
+ASSET – an agent.
+AUM SHRINKYO – underground group in Japan with expertise in germ and chemical warfare.
+AVB – Hungary's security service, the Allami Vedelmi Batosag.
+
+
+B
+
+
+BACKSTOP – an arrangement between two persons for the express purpose of substantiating a cover story or alibi.
+BAG JOB – surreptitious entry, break and enter.
+BAKIN – Indonesia's security service.
+BATF – a US security service, the Bureau of Alcohol, Tobacco, and Firearms.
+BETTY BUREAU – FBI slang for a female support person who has worked for the FBI her entire career.
+BfV – Germany's security service, the Bundesamt fir Verfassungsschutz.
+BIOGRAPHICAL LEVERAGE – blackmail info.
+BIRDWATCHER -  slang used by British Intelligence for a spy.
+BLACK-FLAGGED – an agent or intelligence officer who is to be interrogated and summarily shot if apprehended.
+BLIND DATE – the first meeting with an unknown person.
+BLACK PROPOGANDA – a smear campaign, usually consisting of character assassination.
+BLOWBACK – unexpected negative consequences of spying activity.
+BLOWFISH – a mathematical algorithm for computer encryption of text that purportedly can only be cracked by brute force if the pass-phrase is unknown.
+BLOWN – detected.
+BLUE-ON-BLUE – friendly fire, inadvertent hostile engagement between allies.
+BND – Germany's intelligence agency, the Bundesnachrichtendienst. Literally translated as the Federal News Agency.
+Bona Fides - proof of a person's claimed identity.
+BOX – slang for Britain's security service, MI.5.
+BREVITY CODES – a system of code-words used by members of a surveillance team.
+BRICK AGENT – an FBI agent who works inside a field office. Also see STREET AGENT.
+BRIDE AGENT - an agent who acts as a courier from a case officer to an agent in a denied area.
+BRUSH CONTACT – a clandestine, momentary contact between two agents who are passing information, documents, or equipment.
+BRUSH PASS – same as brush contact.
+BSS – Belgium's security service
+BUCAR – an FBI car.
+BUG-ON-A-CHIP – slang for USA's Clipper chip.
+BUPO – Switzerland's security service.
+BURNT – burned, completed exposed. See BLOWN.
+BVD – Netherlands' security service.
+
+
+
+C
+
+
+C4I - Command, Control, Communications, Computers, and Intelligence (C4I)
+CALL-UP – a police term meaning a situation where a SWAT team has deployed.
+CAMP X - Canada's secret domestic training base.
+CANNON – a thief who steals back the inducement offered by the spies to an informant, defector, etc.
+CARIBINIERI – Italy's federal antiterrorist police.
+CARNIVORE - computer program designed by the FBI to allow the FBI to collect electronic communications from a specific user targeted in an investigation.
+CASE OFFICER – operations officer, controller.
+CBI – India's security service.
+CENTER - KGB HQ in Moscow
+CHASE CAR – a security detail or bodyguard vehicle that follows the subject.
+CHEATING – command of the target from in front of the target during floating box surveillance. See also COMMAND OF THE TARGET.
+CHENG PAO K'O – China's intelligence agency.
+CHICKEN FEED – low grade information fed through a double agent to one's adversary with the intention of building the credibility of the double agent.
+CHOBETSU – One of Japan's security services.
+CIA – a US intelligence agency.
+CNT – an acronym for crisis negotiation team. CNTs are used by police in situations involving hostage-takers or barricaded suspects. The name CNT is a misnomer – their true role is not to negotiate, but rather to obtain intelligence to facilitate an assault by the SWAT team, and to distract the suspect to divert his attention from the coming assault.
+COBBLER - a spy who creates false passports, visas, diplomas and other documents.
+COMINT – acronym for communications intelligence.
+COMM – a small note or other written communication from an underground organization or one of its members. They are typically written on cigarette wrappers, chewing gum wrappers, etc.
+COMMAND OF THE TARGET – active visual observation of the subject of the surveillance operation. Used during pedestrian and vehicle surveillance. See also CHEATING and FLOATING BOX.
+COMMANDO – a civilian, military, or paramilitary combat group using irregular tactics. Commando can refer to an individual, a cell, a squad, or the organization as a whole.
+COMMIT – a surveillance operative performing the commit function is watching a location to determine the direction that the target takes (or "commits" to).
+COMPROMISED – breached security status.
+COMPUTER FORENSICS -  Investigation of a computer system believed to be involved in cybercrime. Also used in espionage to retrieve intelligence from stolen laptops or pcs.
+CONG AN BO – Vietnam's security service.
+CONSUMER – a person or an organization on an intelligence agency's distribution list. Also see PRODUCT.
+COOKED – a mixture of genuine and fake material provided via a double agent to one's adversary.
+COORDINATION DE LA SECURITE DU TERRITOIRE – Algeria's security service.
+COUNTERESPIONAGE – activities designed to impede the efforts of hostile intelligence agencies engaged in espionage against one's own nation, allies, and citizens.
+COUNTERINTELLIGENCE – activities designed to impede or thwart the efforts of hostile intelligence agencies attempting to penetrate or compromise one's own intelligence agency.
+COUSINS – slang for CIA.
+COVER – persona, profession, purpose, activity, fictitious image maintained by an undercover operative.
+COVERT ACTION AGENT – a spy who works to reorient an entire nation's politics in favor of his country.
+CS GAS – a form of tear gas, full name ortho-chlorobenzalmalanonitrile, used by cops, SWAT teams, and the military.
+CSE – Canada's signal intelligence agency, Communications Security Establishment. 
+CSIS – Canada's security service.
+CUT-OUT – a mechanism or person used to allow agents to pass material or messages securely; also an agent who functions as an intermediary between a spymaster and other subagents.
+COURIER – delivers documents, money, etc.
+
+
+D
+
+
+DAM – France's military intelligence agency.
+DANGLE – a spy who poses as a walk-in to penetrate the other side. Also see WALK-IN.
+DARPA – Defense Advanced Research Projects Agency (USA).
+DATA RECOVERY – bureaucrat-talk for the backdoor built into all US-exported crypto software since 1998.
+DCSS – Denmark's security service.
+DDIS – Denmark's intelligence agency.
+DEAD DROP – a physical location where communications, documents, or equipment is covertly placed for another person to collect without direct contact between the parties.
+DEAD-LETTER BOX – same as dead drop.
+DEAD-LETTER DROP – same as dead drop.
+DECOY – distracts adversary's attention.
+DEEP-COVER AGENT – permanent cover.
+DEFECTOR – a person who has renounced his/her country of citizenship.
+DGI – Cuba's intelligence agency.
+DGSE – France's intelligence agency.
+DHS - Department of Homeland Security - USA agency
+DIA – a US intelligence agency, the Defense Intelligence Agency.
+DIRTY TRICKS – covert sabotage carried out by a security service or intelligence agency, ranging from pranks to assassination.
+DIVERSION – distracts adversary's attention.
+DLB – acronym for dead-letter box. Also see DEAD DROP.
+DOPE BOOK – a notebook kept with a sniper rifle for the purposes of recording the atmospheric conditions, range, lighting, and resulting hit or miss of every shot fired.
+DOPPELGANGER – a look-a-like. See also LOOK-A-LIKE.
+DOUBLE-AGENT – simultaneously serves two adversaries (often with their knowledge).
+DRY CLEANING – active counter surveillance and anti-surveillance against pavement artists and wheel artists.
+DS – Bulgaria's security service, the Drzaven Sigurmost.
+DSD – Australia's signal intelligence agency, Defence Signals Directorate.
+DST – France's security service.
+DUBOK – Russian term for a dead-letter box. Also see DEAD DROP.
+
+
+
+E
+
+
+E&E – Evade & Escape
+EARS ONLY - material too secret to commit to writing.
+ELEMENT – a five-man SWAT team. Consisting of a team leader, scout, rear guard, and two assaulters. The rear guard provides cover for the scout and is usually armed with a 12-guage shotgun. The assaulters usually carry Heckler & Koch 9mm MP-5 submachine guns. See also ASSAULTER.
+ELLIPTICAL CONVERSATION – says one thing but means another.
+ENIGMA - the machine used by the Germans to encode messages during WWII.
+EQUESTRIAN POSTURE – an effect produced by rigor mortis whereby the cadaver sits upright as if riding in a saddle, with arms outstretched.
+Escort: the operations officer assigned to lead a defector along an escape route.
+ESPIONAGE – clandestine collection of intelligence by a non-domestic intelligence agency.
+ESS – acronym for environmentally stable strategy, a concept used in strategic game-theory.
+ETA – an underground group in Spain.
+EVOC – an acronym for Emergency Vehicle Operation Course, taught at the FBI academy in Quantico
+EXECUTIVE ACTION -  assassination.
+EXFILTRATION - a clandestine rescue operation designed to bring a defector, refugee, or an operative and his or her family out of harm's way.
+EXPATS - expatriates who have taken up residence in another country and are helping to define its culture.
+EYES ONLY - documents that may be read but not discussed.
+
+
+F
+
+
+FALN – an underground group in Puerto Rico.
+FALSE FLAG RECRUITMENT – impersonation by a spy while recruiting an informant, defector, agent, etc.
+FBI – a US security service.
+FDS – One of Mexico's security services.
+FIBONACCI SYSTEM – a system of non-carrying addition used for one-time pad codes. For example, (Fib) 999 + 222 = 111.
+FILLING – the act of inserting material in a dead drop.
+FLAPS & SEALS - the tradecraft involved when making surreptitious openings and closings of envelopes, seals, and secure pouches.
+FLIP – a U Turn made by the target during a vehicle surveillance operation.
+FLOATER - a person used one-time, occasionally, or even unknowingly for an intelligence operation.
+FLOATING BOX – a method of surveillance where a team of operators establishes a containment box around the target wherever he/she goes.
+FMLN – Frente Farabundo Marti para Liberacion Nacional, an underground group in El Salvador.
+FOLLOW – a surveillance team is executing a follow when they are shadowing a moving target. See also FLOATING BOX. A follow begins when the target exits the stakeout box and a surveillance operative attains command of the target. See also COMMAND OF THE TARGET.
+FOOTFALL DETECTOR – vibration sensor designed to detect walking humans.
+FORENSICS - The use of science and technology to investigate and establish facts in criminal or civil courts of law.
+FOUR-BAGGER – disclipline of an agent by FBI headquarters, consisting of censure, transfer, suspension, and probation.
+FRA – Sweden's military signals intelligence agency.
+FREQUENCY FLOODING – a technique that allows an ordinary telephone to become a covert listening device.
+FRIEND – slang for an agent, informant, or mole providing information to a handler.
+FRIENDS – slang for Britain's secret intelligence service, MI.6.
+FRONT – a legitimate-appearing business created by an intelligence agency or security service to provide cover for spies and their operations.
+FSB – Russia's federal security service, responsible for counterespionage.
+FUNKSPIEL – impersonation during electronic communications. Derived from the German phrase for "radio game".
+FUNNY PAPER – slang for the counterfeiting and forged documents section of an intelligence agency or security service.
+
+
+
+G
+
+
+GCHQ – Britain's sigint agency, Government Communications Head Quarters. 
+GIA – an underground group in Algeria.
+GID – Iraq's main intelligence organization, Da' Irat al Mukhabarat al-Amah
+GRAYMAIL- Threat by a defendant in a trial to expose intelligence activities or other classified information if prosecuted
+GHOUL -: agent who searches obituaries and graveyards for names of the deceased for use by agents.
+GRU – Russian military intelligence, the Glavnoye Razvedyvatelnoye Upravleniye.
+GSS – Israel's security service (also called Shin Beth)
+GUAN-XI – an access agent for China's intelligence agency
+GUOANBU – one of China's security services.
+GUSTAV WEBER – Hitler's double, used by the Fuhrer's bodyguards to stymie the Allies as to his whereabouts. Shot in the forehead immediately after Hitler's death.
+
+
+
+H
+
+
+HAMAS – an underground group in Palestine (now in power).
+HANDLER - a case officer who is responsible for handling agents in operations.
+HARD MAN – an experienced operative who can survive in a hostile environment and who has killed.
+HARD TARGET – a surveillance target who is actively maintaining secrecy and may not reveal that he/she has detected the surveillance team.
+HEZBOLLAH – an underground group in Lebanon, alleged to have operating units in Latin America with links to major drug dealers.
+HONEY POT – Mata Hari, Raven, lady, femme fatale; a female agent using romance to compromise a target.
+HONEY TRAP - Slang for use of men or women in sexual situations to intimidate or snare others. This use of sex to trap or blackmail an individual is standard practice in intelligence operations
+HOOLIGAN TOOL – a specialized tool much like a crowbar, developed by fire departments for prying open doors and windows. Also used by SWAT teams.
+HOSTILE -  term used to describe the organizations and activities of the opposition services.
+HOSTILE RECRUITMENT – recruitment by threat or force of an uncooperative informant, mole, or agent-in-place.
+HUMINT – intelligence activities involving people rather than electronic eavesdropping or communications interception.
+HUNTING PACK – slang for surveillance team.
+
+
+I
+
+
+IAKHBAL – Israeli police unit that fights organized crime.
+ICBM – an acronym for instant calm breath method, a way to overcome the flight-or-fight reflex (panic). Also reduces hyperventilation.
+ICBM - Intercontinental Ballistic Missiles. Capable of international nuclear assaults from almost any range
+ILD – one of China's security services.
+ILLEGAL – an intelligence officer operating in a foreign nation without the protection of diplomatic immunity.
+IMINT – acronym for image intelligence.
+INFILTRATION -  the secret movement of an operative into a target area with the intent that his or her presence will go undetected.
+INFORMANT – a legitimate member of a target group providing intelligence to the surveillance team.
+INFO WAR – Information Warfare, modern propaganda through (mis)information
+INNOCENT POSTCARD - a postcard with an innocuous message sent to an address in a neutral country to verify the continued security of an undercover operative.
+INTELLIGENCE OFFICER – a trained member of an intelligence agency, an employee on salary.
+INTERPOL – international police body that coordinates the intelligence gathering and investigative activities of member police forces.
+INVESTIGATIVE SPECIALIST – the FBI's name for a surveillance operative (vehicle or foot). Pay grade GS-7 to GS-10. See also SSG.
+IRA – an underground group in Northern Ireland.
+ISTIKHBARAT AL ASKARIYA – Libyan military intelligence.
+ITAC – an acronym for International Terrorist Assessment Center, located in Washington DC.
+
+
+J
+
+
+JARKING – bugging a weapons cache, often rendering weapons unusable.
+JETRO -- one of Japan's intelligence agencies.
+JIHAZ AMN AL DAOULA – Egypt's security service.
+JOE – a deep-cover agent.
+JRA – Japanese Red Army, an underground group in Japan.
+
+
+K
+
+
+KEMPEI TAI – Japan's secret police.
+KEYLOGGER: A software or hardware device or program used to capture the keystrokes any actions of a computer user, often without their knowledge.
+KGB – Kometet Gosudarstvennoi Bezopasnosti.
+K-LINE – SVR internal security and investigations section.
+KOANCHO – Japan's counterintelligence and security service.
+
+
+L
+
+
+L-PILL - a poison pill used by operatives to commit suicide.
+L5 – 4096 bit encryption algorithm
+LADY – honey pot.
+LAKAM – one of Israel's intelligence agencies (Ministry of Defense).
+LEGEND – the faked biography of a deep-cover agent.
+LETTERBOX – a person who is acting as a go-between. Also see CUT-OUT.
+LINK DIAGRAM – connections being analyzed in a complex police investigation or counterespionage case. See problem-solving matrix.
+LLB – an acronym for live-letter box, an address used to receive communication to be forwarded to an intelligence agency. See also DLB.
+LOOK-A-LIKES – decoys used to confuse hit squads and surveillance teams.
+LSD – an acronym for d-lysergic acid diethylanide, a hallucinatory drug discovered in 1943 by Dr. Albert Hofmann, a researcher at Switzerland's Sandoz corporation, a pharmaceutical manufacturer. Subsequently monopolized by the CIA for its MKULTRA project that developed methods for secretly controlling people. Still used today by numerous intelligence agencies and security services for the following functions – 1. disturbance of memory; 2. discrediting by aberrant behavior; 3. eliciting of information; 4. creation of dependence; 5. suggestibility. At the CIA's request, in 1954 Eli Lilly & Company developed a method for manufacturing LSD from publicly available chemicals. The CIA's bungling of MKULTRA allowed the drug to escape from the lab, where the CIA lost control of it. LSD subsequently ruined two generations of young Americans. No CIA officer or contractor was ever reprimanded or punished.
+
+
+
+M
+
+
+M-19 – underground group in Columbia.
+MASINT - measurement and signature intelligence; uses elements that do not fit into the traditional scope of IMINT and SIGINT.
+MASKIROVDA – Russian name for deception techniques designed to fool US spy satellites. Recently used by India's counterintelligence agency to conceal nuclear testing from the CIA.
+MATA HARI – honeypot, femme fatale,
+MBRF – one of Russia's intelligence agencies.
+MERCURY FULMINATE – an initiating agent for detonating PETN. See PETN.
+MI.5 – Britain's security service. K Branch is responsible for counterespionage, F Branch for countersubversion, C Branch for security of sensitive government installations.
+MI.6 – Britain's intelligence agency.
+MICE – an acronym for money ideology compromise ego (methods used by intelligence agencies and security services to ruin a target).
+MILF - Moro Islamic Liberation Front
+MINI MANUAL OF THE URBAN GUERRILLA – an underground operations manual by Brazilian freedom-fighter Carlos Marighella. Contains 41 chapters. Banned in many countries.
+MIN/MAX – a concept in strategic game-theory.
+MITI -- one of Japan's intelligence agencies.
+MOLE – a penetration agent.
+MONTENEROS – an underground group in Argentina.
+MOSSAD – one of Israel's intelligence agencies, noted for its expertise in wet affairs. Literally translated as "institute". Never referred to as the MOSSAD, but rather simply called MOSSAD.
+MST – Landless Rural Workers Movement, an underground group in Brazil.
+MUKHABARAT – Libya's intelligence agency.
+MUSIC BOX - Slang for Clandestine Radio
+MUSLIM UIGHUR – an underground group in China.
+
+
+
+N
+
+
+
+NAKED - a spy operating without cover or backup.
+NAICHO – one of Japan's intelligence agencies.
+NARCOTHERAPY HYPNOSIS – CIA interrogators use hypnosis to force regression in the prisoner to make him believe he is talking to his spouse. The prisoner is first prepared by pharmaceuticals according to the following protocol. 1. An injection of 10 mg sodium pentothal to render unconscious. 2. Wait 20 minutes. 3. An injection of 10 mg benzodrine to revive the prisoner to a state partway between waking and sleep. 4. Repeat step 3 if required. At the end of the interrogation a hypnotically induced amnesia is invoked.
+NEUROLINGUISTICS – a branch of psychology used by intelligence agencies and security services to covertly manipulate unsuspecting human targets.
+NEUTRON BOMBARDMENT – used by security services like Britain's MI.5, America's FBI, Germany's BfV, and France's DST to detect microdots and invisible writing in postal mail. Originally developed by the Atomic Weapons Research Establishment in Britain for use by MI.5.
+NIGHTCRAWLER – a talent spotter who prowls bars and nightclubs looking for government employees, military personnel, etc. who can be compromised using booze, drugs, or sex. Also see TALENT SPOTTER.
+NINJAS – slang for members of a SWAT team.
+NITROUS OXIDE – an anesthetic inhalant used to render sleeping targets unconscious during surreptitious entry by goon squads.
+NMI – Norway's security service.
+NOC - A spy with Non-Official Cover. A fake or real private sector job used by a case officer as a cover.
+NOTIONAL AGENT - Made up or nonexistent secret agent, usually used for a source of fabricated information or the means by which such information was obtained
+NSA – US sigint intelligence agency and security service, the National Security Agency. 
+NSS – Bulgaria's security service.
+NSTL – the FBI's national security threat list
+NUGGET - British term for the bait (money, political asylum, sex, or career opportunity) used to offer a potential defector
+NURSEMAID - Russian term for the security service officer who accompanies delegations to other countries to prevent anyone from defecting.
+Owned and Operated by InfoBureau.net Co.
+All Rights Reserved © 2008
+
+
+O
+
+
+
+OBS – Croatia's intelligence agency, the Obavestajna Bezbednostna Sluzba.
+OP – observation post.
+OFFENSIVE PENETRATION OPERATION – infiltration of an agent into a target group or organization.
+OFFSITE – a covert FBI site or facility situated away from a field office.
+OG – an acronym for original gangmembers, now in their thirties and forties, who supply cocaine and heroin to street gangs.
+ONE-TIME PAD – an unbreakable code system that works by adding the numeric value of the plaintext with a randomly-generated code string (the one-time pad). Also see FIBONACCI SYSTEM.
+OPEN-SOURCE - intelligence gained from public materials.
+OSA – official secrets act, usually a law to enable governments to conceal their mistakes from their own population.
+OSINT -: open source intelligence; an all-source process which includes HUMINT, IMINT, SIGINT, and MASINT which analysts must understand and integrate to produce the best possible intelligence.
+OSS - Office of Strategic Services; U.S.'s WWII intelligence, sabotage, and subversion organization
+OUTRIDER – a wheel artist responsible for ensuring that the target does not get outside the floating box of surveillance vehicles. See also FLOATING BOX.
+OVERT TARGET – deliberately attempts to draw attention and drain the resources of an intelligence agency or security service. Occasionally a decoy.
+
+
+
+P
+
+
+
+PARALLEL-LINE/INCIDENTAL-CAPACITANCE – a method of telephone, telex, and communications eavesdropping that is virtually undetectable.
+PAROLES - passwords to identify agents to each other.
+PATTERN - the behavior and daily routine of an operative that makes his or her identity unique.
+PAVEMENT ARTIST – outdoor surveillance specialist operating on foot.
+PEEP – photographer.
+PERIMETER SURVEILLANCE – is used to alert the surveillance team when the target enters or leaves a specific area.
+PETN – Pentaery-thritol tetranitrate, a plastic explosive favored by intelligence agencies and security services. See mercury fulminate.
+PFLP – an underground group in Palestine.
+PHOTINT – acronym for photo intelligence.
+PIG - Russian intelligence term for traitor.
+PICKET SURVEILLANCE – focuses on times and places when target is likely engaged in activities of interest to the surveillance team. Also called chokepoint surveillance. Named after the openings in a picket fence.
+PICKUP – when the target of a surveillance operation is first spotted inside the stakeout box.
+PINHOLE CAMERA – video camera with fiber-optic lens attachment.
+PLAINTEXT -: the original message before encryption.
+PLAYBACK - to provide false information to the enemy while gaining accurate information from him or her.
+POCKET LITTER - items in a spy's pocket (receipts, coins, theater tickets, etc.) that add authenticity to his or her identity.
+POSSE COMITATAS – a Latin phrase that loosely means power of the people.
+PROBLEM-SOLVING MATRIX – a grid-based notation system used by police investigators and counterespionage officers when dealing with complex cases.
+PRODUCT – finished intelligence that has been evaluated by an intelligence agency and is ready for distribution to consumers. Also see CONSUMER.
+PROFESSIONAL-NAME – nom de guerre of a spy.
+PROFILE STOP – a random stop and search by police, based on a suspect's race, minority status, economic status, religion, physical appearance, travel status, location, etc. Previously inflicted on minorities and poor whites, but currently being expanded by bureaucrats to include all US citizens.
+PROFILING - Stereotyping a group or "type" of person to assess potential dangers, suspects
+PROVOCATEUR -  an operative sent to incite a target group to action for purposes of entrapping or embarrassing them.
+PSB – one of China's secret police agencies.
+PSIA – one of Japan's security services.
+PSYCHIC COMBAT – a condition of active psychological warfare operations between two covert adversaries.
+PSYCHODYNAMICS – the CIA's psychological profiling system, used in combination with psychobiographic analysis.
+
+
+Q
+
+
+QUANG BO – Vietnam's military intelligence agency.
+QODS – One of Iran's security services.
+QRF – quick reaction force.
+
+
+
+R
+
+
+
+RADINT – acronym for radar intelligence.
+RAID – an acronym for Rapid Assessment and Initial Detection, consisting of teams of National Guardsmen who assist civilian authorities after a suspected biological/toxin/chemical attack on a population center.
+RAVEN – a honey pot.
+RAW - RAW: India's External Intelligence Agency
+RCMP – police agency in Canada similar to the FBI in the USA. Acronym for Royal Canadian Mounted Police. Also known as RCM Police.
+RCMP SECURITY SERVICE – counterespionage, counterintelligence, and counterterrorist branch of RCMP. Also known as RCMP SPECIAL SERVICES.
+RED BRIGADE – an underground group in Italy.
+RENT-A-GOONS – operatives proficient in hand-to-hand combat, used as muscle support when direct physical confrontation is likely.
+RESISTANCE – a civilian underground organization, consisting of cells (1 to 10 persons), circles (a group of cells), and sections (a group of circles).
+RG – France's police intelligence security service, Renseignements Generaux.
+RING – a network of spies or agents.
+ROLLED UP - when an operation goes bad and an agent is arrested.
+ROSCOE – handgun.
+RUSE DE GUERRE – subterfuge
+RZ – an underground group in Germany. Literally translated as revolutionary cell
+
+
+
+S
+
+
+
+SA – FBI special agent.
+SAFEHOUSE – a dwelling place or hideout unknown to the adversary.
+SANITIZE - to delete specific material or revise a report or other document to prevent the identification of intelligence sources and collection methods.
+SAPO – Sweden's security service.
+SASHA KVAP – Russian mole inside Hitler's bunker during the final months of World War II. Subsequently poisoned by the KGB in 1955.
+SAVAK – one of Iraq's security services.
+SCIF – acronym for Secured Compartmentalized Information Facility (in Fort Gillem, GA, USA) where Clipper is housed (rumored to have already been penetrated by agents of China's intelligence agencies).
+SEMTEX – a military explosive suitable for sabotage and terrorist operations.
+SECRET CLASSIFICATIONS – Confidential, Secret, Top Secret, and (SCI) Special Compartmentalized Information.
+SERE – an acronym for survival, evasion, resistance, and escape.
+SERVICING – the act of removing material from a dead drop.
+SET UP – to begin to conduct surveillance on a target.
+SEVENTY-ONE YARDS – according to FBI statistics, this is the distance at which a typical police sniper will get you. Although the SR60 .308 sniper rifle used by most police departments is designed for distances up to 600 yards, most police snipers do not fire at suspects beyond 400 yards. (Of course, at any distance an execution is still an execution.)
+SHOE - False passport of VISA
+SHIN BETH – Israel's security service (also called GSS).
+SHINING PATH – an underground group in Peru.
+SMERSH – KGB assassination group. Officially disbanded ;) The name derives from the Russian phrase "death to spies".
+SIDE – Argentina's security service.
+SIGINT – signals intelligence (interception of electronic communications)
+SINN FEIN – the political arm (party) of the IRA.
+SIS – one of Britain's intelligence agencies, the secret intelligence service.
+SIT REP – situation report.
+SIX – slang for a police officer, police cruiser, or a police patrol. Used as a warning in the criminal community.
+SLEEPER AGENT – an inactive deep-cover agent.
+SLUZBA BEZPIECZENSTWA – Poland's security service, also called the SB.
+SOFT TARGET – an easy surveillance target, untrained and not looking for surveillance.
+SOG – an acronym for Special Operations Group, FBI agents who conduct surveillance. Incontrast, SSG is composed of non-agents. See also SSG.
+SOS – dot dot dot dash dash dash dot dot dot.
+SPECIAL BRANCH – the security branch of the British police.
+SPLASHED – describes a bodyguard whose client has been assassinated. Also see WET AFFAIR.
+SPOOK – a spy.
+SPY – any member of an intelligence agency, security service, police agency, resistance movement, guerrilla group, or other organization engaged in covert intelligence-gathering activities.
+SRI – Romania's security service (rumored to be made up of former members of Ceausescu's secret police).
+SSG – an acronym for Surveillance Specialist Group, which is what the FBI calls a surveillance team. See also INVESTIGATIVE SPECIALIST. See also SOG.
+SSS – Georgia's security service.
+STATION - post where espionage is conducted
+StB – Czechoslovakia's security service, the Statni Tajna Bezpecnost.
+STINGBALL – a flashbang grenade used by SWAT teams to disperse crowds and disorient barricaded suspects. Throws off rubber fragments when detonated. It is standard police procedure to cover up the deaths of suspects inadvertently killed by stingballs.
+STREET AGENT – an FBI agent whose work takes him to various locations. Also see BRICK AGENT.
+SVR – one of Russia's intelligence agencies, the Slnzhba Vneshnei Razvedaki.
+SWALLOW - a female agent employed to seduce people for intelligence purposes.
+SWARMING – overfilling a location with surveillance operatives. Often used in psy ops as a means for controlling the target's environment.
+SYNTHETIC HEMOGLOBIN – a component used in carbon monoxoide detector alarms. The radiation weapons recently developed and deployed by DARPA will set off these alarms.
+
+
+
+T
+
+
+
+TALEBAN – underground group in Afghanistan.
+TALENT SPOTTER – same as ACCESS AGENT.
+TARGET – the victim of surveillance, the subject.
+TECHINT - technical intelligence; analysis of fielded equipment for training, research, and the development of new weapons and equipment for eventual intelligence use.
+TERMINATED - murdered.
+THE TAKE - information gathered by espionage.
+THERMAL IMAGER – a heat-sensitive surveillance video camera and display.
+THREE Bs – Booze, broads, and bucars. The three temptations of FBI agents.
+THROW PHONE – a cellular telephone thrown to a barricaded suspect by the SWAT team.
+THROWAWAY - an agent considered expendable.
+TIMED DROP - a dead drop that will be retrieved by a recipient after a set time period.
+TRADECRAFT - The methods used in clandestine operations such as espionage. The skill acquired through experience in a trade; often used to discuss skill in espionage
+TRAFFIC ANALYSIS -  methods for gaining intelligence from the patterns and volumes of messages of radio intercepts.
+TRIADS – Asian organized crime gangs.
+TRIGGER – a surveillance operative who is watching the target's vacant vehicle, home, garage, office, restaurant etc. and who alerts the rest of the surveillance team when the target is spotted.
+TUPAMAROS – an underground group in Uruguay.
+
+
+
+U
+
+
+
+U-2 - the world's most famous spy plane, developed by the U.S. specifically for intelligence collection in the thin atmosphere 55,000 feet above the Soviet Union; it is still in use today.
+UACB – FBI acronym for Unless Advised to the Contrary by the Bureau.
+UNCLE - the HQ of any espionage agency or service
+UNITED RED ARMY – an underground group in Japan.UNS – Croatia's security service, the Ured za Nacionalnu Sigurnost.
+UNSUB – an unknown subject in a surveillance operation.
+UOP – Poland's security service.
+USSA – slang for a USA reminiscent of the oppressive totalitarianism of the former USSR.
+
+
+
+
+V
+
+
+
+VCP – vehicle control point.
+VEVAK – Iran's intelligence agency.
+VICKIE WEAVER – American citizen probably murdered by the FBI. A landmark case for many concerned Americans.
+
+
+
+
+W
+
+
+
+WAHABI – a Saudi Islamic underground group.
+WALK-IN – an unsolicited volunteer.
+WATCH-LIST – people targeted for routine surveillance.
+WET JOB / AFFAIR – results in death of target or major bloodshed. Also see SPLASHED.
+WHEEL ARTIST – an outdoor surveillance specialist operating in a vehicle.
+WILDERNESS OF MIRRORS – a spy operation so complicated that it is no longer possible to separate truth and untruth.
+WINDOW DRESSING - ancillary materials that are included in a cover story or deception operation to help convince the opposition or other casual observers that what they are observing is genuine.
+
+
+X
+
+
+
+X RAYS – used by intelligence agencies and security services to pick key-locks and to deduce the settings for combination locks. Equipment fits in a standard briefcase.
+
+
+
+Y
+
+
+
+YAKUZA - A criminal organization from Japan. One of the world's largest.
+
+
+
+Z
+
+
+ZAPATISTA NATIONAL LIBERATION ARMY – an underground group in Mexico.
+ZERO-OUT – the range at which a weapon's sights will produce a bull's eye hit. Handgun fixed sights are usually zeroed-out at 25 yards. A sniper rifle scope is usually zeroed-out at 100 yards. The term cold barrel zero refers to the calibration of a SWAT sniper rifle so that the first (cold) shot will hit a target at 100 yards. Subsequent rounds will diverge due to barrel heating.
+ZHONGYANG LIANLUOBU – one of China's intelligence agencies.
+ZOU-HOU-MAN – back door access to a protected target (as used by China's intelligence agencies).

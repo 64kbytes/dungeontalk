@@ -11,7 +11,7 @@ class Planning(Phase):
 			self.end()
 			return '+'
 		else:
-			self.dm.ego.set_instruction(instruction)
+			self.dm.ego.add_instruction(instruction)
 
 		return 'Ok'
 		
@@ -34,16 +34,16 @@ class Execution(Phase):
 		for character,roll in initiative_rolls:
 			print "%s %s" % (character.get_full_name(), character.get_instructions() or 'Do nothing')
 			
-			
+			if character.get_instructions():
 
-			#self.dm.read(character.get_instructions())
-			#self.dm.load()
-			#print self.dm.get_next_instruction()
-			#self.dm.clear()
+				character.interpreter.read(character.get_instructions())
+				character.interpreter.exec_next()
+
 
 		self.end()
 
 	def end(self):
+		print 'Done execution\n'
 		super(Execution, self).end()
 
 

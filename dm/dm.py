@@ -1,7 +1,7 @@
 from dungeon import Dungeon, Room, Route
 from character import Character
 from rand import *
-from knowledge import Knowledge
+from ai import Knowledge
 
 from core import Turn
 from phases import Planning, Execution, Adjust, Review 
@@ -175,7 +175,6 @@ class DM(object):
 		
 		super(DM, self).__init__(*args, **kwargs)
 
-		self.debug = True
 		self.phase = None
 		self.turn = Turn(dm=self, phases=[Planning, Execution, Adjust, Review])
 		self.knowledge = Knowledge()

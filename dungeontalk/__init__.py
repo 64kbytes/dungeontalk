@@ -1,1 +1,1 @@
-from dungeontalk import DungeonTalk
+from dungeontalk import DungeonTalk, DoubleTalk, Interpreter

@@ -1,0 +1,11 @@
+// this is a line comment
+
+/*
+	this is a block comment
+	spawning several
+	lines
+*/
+
+a = 1		// this
+b = 2 		// should
+prnt a+b 	// work
