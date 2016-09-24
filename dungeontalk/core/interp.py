@@ -57,6 +57,9 @@ class Interpreter(object):
 				return self.instr[address]
 			except IndexError as err:
 				return False
+
+		def get_all_instructions(self):
+			return self.instr
 			
 		def push_instruction(self, instruction):
 			self.instr.append(instruction)
@@ -121,9 +124,11 @@ class Interpreter(object):
 		"""
 		Executes one line at a time
 		"""
-		
-		#if self.debug:
-		#	print Interpreter.Snapshot(self)
+		try:
+			if self.debug:
+				print Interpreter.Snapshot(self)
+		except:
+			pass
 		
 		instruction = self.memory.get_instruction(address=self.pntr)
 

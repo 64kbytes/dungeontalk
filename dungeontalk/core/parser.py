@@ -75,12 +75,12 @@ class Parser(object):
 			if lexeme is False:
 				return False
 			
-			# preprocessor directives
+			# handle comments
 			if isinstance(lexeme, self.lang.Preprocessor):
 				if isinstance(lexeme, self.lang.CommentLine):
 					# skips until newline
 					self.verbatim(self.lang.NewLine)
-					return self.lang.NewLine(word='\n')
+					continue
 				
 				if isinstance(lexeme, self.lang.CommentBlock):
 					# skips until closed comment block
@@ -230,10 +230,13 @@ class Parser(object):
 			
 		if until is not None and isinstance(lexeme, until):
 			return lexeme
-							
+		
+		# is keyword					
 		if isinstance(lexeme, self.lang.Keyword):
+			# is a block opening keyword
 			if isinstance(lexeme, self.lang.Block):
 				self.push_block((self.count, lexeme))
+			# is a delimiting keyword
 			elif isinstance(lexeme, self.lang.Delimiter):
 				p0, b = self.pull_block()
 				lexeme.owner, b.length = (b, self.count - p0 - 1)
@@ -242,12 +245,14 @@ class Parser(object):
 			self.count += 1
 			return lexeme.parse(self)
 
+		# delimiter, constant or identifier
 		elif isinstance(lexeme, (self.lang.Delimiter, self.lang.Constant, self.lang.Identifier)):
 			self.pending.append(lexeme)
 			
 			# add to instruction counter
 			self.count += 1
 			return self.expression()
+			
 		elif isinstance(lexeme, (self.lang.Parameter)):
 			raise Exception("Misplaced parameter %s %s" % (lexeme.type(), lexeme.word))
 		else:

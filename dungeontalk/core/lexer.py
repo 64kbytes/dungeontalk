@@ -85,13 +85,16 @@ class Lexer(object):
 							
 			# search in syntax tree
 			for regexp in tree:
+
 				match = None
 				if regexp is None:
-					self.backtrack(1)
+					self.backtrack(len(token.word))
 					continue
 				
 				try:
-				
+					
+					#print token.word, re.match(regexp, token.word), regexp
+
 					if re.match(regexp, token.word):
 						word.append(token.word)
 						# move forward in tree
@@ -104,8 +107,8 @@ class Lexer(object):
 					print err
 					exit(1)
 	
+			# is there a possible continuation to this symbol?
 			if match is not None:
-				# there is a possible continuation to this symbol
 				if isinstance(tree, dict):
 					continue
 			else:
@@ -116,8 +119,8 @@ class Lexer(object):
 				tree = self.syntax.symbols
 				continue
 
-			token.word = ''.join(word)
-			
+			token.word = ''.join(word)			
+
 			# return a typed lexeme
 			return tree(token.word, (token.line, token.char))
 

@@ -9,6 +9,7 @@ class InterpreterTest(unittest.TestCase):
 
 	def clear(self):
 		self.interpreter.clear()
+
 	"""
 	def test_program(self):
 		self.interpreter.read(os.path.dirname(os.path.realpath(__file__)) + '/scripts/generic_script.dtk', is_file=True)
@@ -18,6 +19,7 @@ class InterpreterTest(unittest.TestCase):
 				break
 
 		self.clear()
+		print 80*'='
 
 	def test_comments(self):
 		
@@ -28,6 +30,7 @@ class InterpreterTest(unittest.TestCase):
 				break
 
 		self.clear()
+		print 80*'='
 
 	def test_comments(self):
 		
@@ -38,15 +41,20 @@ class InterpreterTest(unittest.TestCase):
 				break
 
 		self.clear()
+		print 80*'='
 	"""
 
 	def test_value_n_reference(self):
 
 		self.interpreter.read(os.path.dirname(os.path.realpath(__file__)) + '/scripts/value_n_reference.dtk', is_file=True)
 
+		#print self.interpreter.memory.get_all_instructions()
+
+		
 		while True:
 			if isinstance(self.interpreter.exec_next(), Interpreter.EOF):
 				break
-
+		
 		self.clear()
+		print 80*'='
 

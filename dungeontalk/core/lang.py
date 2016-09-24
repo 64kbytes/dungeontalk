@@ -605,7 +605,7 @@ class Lang(object):
 			return '<prnt>'
 
 		def parse(self, parser, **kwargs):
-			self.text	= parser.build(parser.expression())
+			self.text = parser.build(parser.expression())
 			return [self, self.text]
 		
 		def eval(self, interp, expression):
