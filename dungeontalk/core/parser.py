@@ -147,6 +147,11 @@ class Parser(object):
 			# add instruction to block
 			else:
 				block.append(i)
+
+	def signature(self):
+		lexeme = self.next()
+		print lexeme
+		exit()
 				
 				
 	def expression(self, until=None):
@@ -182,7 +187,7 @@ class Parser(object):
 				l = self.lang.String(string, (lexeme.line, lexeme.char))
 				expression.push(l)		
 				continue
-			
+
 			if self.lang.Grammar.is_legal(expression + [lexeme], self.lang.expression):
 				expression.push(lexeme)
 			else:
@@ -190,7 +195,8 @@ class Parser(object):
 				#print 'Expression rejected %s' % (lexeme)
 				#print 'Expecting %s' % (expression.hint())
 				#raise Exception('Unexpected %s' % (lexeme))				
-				break	
+				break
+
 		return expression
 		
 	
@@ -245,14 +251,14 @@ class Parser(object):
 			self.count += 1
 			return lexeme.parse(self)
 
-		# delimiter, constant or identifier
-		elif isinstance(lexeme, (self.lang.Delimiter, self.lang.Constant, self.lang.Identifier)):
+		# delimiter, constant, identifier or datatype
+		elif isinstance(lexeme, (self.lang.Delimiter, self.lang.Constant, self.lang.Identifier, self.lang.DataType)):
 			self.pending.append(lexeme)
 			
 			# add to instruction counter
 			self.count += 1
 			return self.expression()
-			
+
 		elif isinstance(lexeme, (self.lang.Parameter)):
 			raise Exception("Misplaced parameter %s %s" % (lexeme.type(), lexeme.word))
 		else:

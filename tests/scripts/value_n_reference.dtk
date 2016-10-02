@@ -1,3 +1,15 @@
-a='abcd'
 
-prnt a
+a=100
+
+def func Integer x, Integer y, String z
+	prnt x
+	prnt y
+	prnt z
+	
+	x+y
+end
+
+r = func [a,2,'blup'] 
+
+prnt 'Ack!'
+prnt r

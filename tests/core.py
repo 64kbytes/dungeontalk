@@ -46,7 +46,7 @@ class InterpreterTest(unittest.TestCase):
 
 	def test_value_n_reference(self):
 
-		self.interpreter.read(os.path.dirname(os.path.realpath(__file__)) + '/scripts/value_n_reference.dtk', is_file=True)
+		self.interpreter.read(os.path.dirname(os.path.realpath(__file__)) + '/scripts/data_types.dtk', is_file=True)
 
 		#print self.interpreter.memory.get_all_instructions()
 

@@ -146,6 +146,7 @@ class Interpreter(object):
 		"""
 		Bind a variable with a value
 		"""
+		print 'LLLL'
 		if isinstance(identifier, self.lang.Identifier):
 			identifier = identifier.word
 
@@ -182,7 +183,7 @@ class Interpreter(object):
 		if len(signature) > 0:
 			# assign calling args to routine signature
 			for k,v in enumerate(self.getval(signature)):
-				self.bind(signature[k][0], arguments[k])
+				self.bind(signature[k].pop(), arguments[k])
 		
 		# is function. Return last statement eval
 		if isinstance(routine, self.lang.Def):

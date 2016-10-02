@@ -1,4 +1,4 @@
-import re
+import re, sys
 
 # 	TODO 
 #	weird delimiter characters behavior 
@@ -84,6 +84,14 @@ class Lang(object):
 		r_identifier:		lambda w,t: Lang.identifier(w,t),
 	}
 
+	data_types = {
+		'CONST':	lambda w,t: Lang.DataType(w,t),
+		'STR':		lambda w,t: Lang.DataType(w,t),
+		'INT':		lambda w,t: Lang.DataType(w,t),
+		'FLOAT':	lambda w,t: Lang.DataType(w,t),
+		'LIST':		lambda w,t: Lang.DataType(w,t),
+	}
+
 	keywords = {
 		'prnt':			lambda w,t: Lang.Prnt(w,t),
 		'if':			lambda w,t: Lang.If(w,t),
@@ -114,7 +122,8 @@ class Lang(object):
 			'<op>': lambda: Lang.expression,
 			'</delim>|</bracket>': lambda: Lang.expression[r'<const>|<ident>'],
 			'<comma>': lambda: Lang.expression
-		}
+		},
+		r'<datatype>': lambda: Lang.expression,
 	}
 
 	@staticmethod
@@ -123,6 +132,8 @@ class Lang(object):
 			return Lang.keywords[w](w,t)
 		elif w in Lang.parameters:
 			return Lang.parameters[w](w,t)
+		elif w in Lang.data_types:
+			return Lang.data_types[w](w,t)
 		else:
 			return Lang.Identifier(w,t)
 
@@ -184,6 +195,9 @@ class Lang(object):
 		def parse(self, parser, **kwargs):
 			raise NotImplementedError
 
+		def eval(self, scope, arguments=None, interp=None):
+			raise NotImplementedError
+
 		def __repr__(self):
 			return '<%s><%s>' % (self.__class__.__name__, self.word)
 
@@ -203,7 +217,9 @@ class Lang(object):
 	class Tab(WhiteSpace):
 		pass
 
+
 	# base types
+
 	class Vector(Lexeme):
 		def type(self):
 			return '<struct>'
@@ -225,6 +241,9 @@ class Lang(object):
 			
 		def eval(self):
 			return str(self)
+
+		def __repr__(self):
+			return '<string %s>' % (self.word)
 	
 
 	class Float(float, Constant):
@@ -387,19 +406,47 @@ class Lang(object):
 		def __repr__(self):
 			return '<s-quote>'
 	
+
+	class DataType(Lexeme):
+		
+		def type(self):
+			return '<datatype>'
+
+		def eval(self, scope, arguments=None, interp=None):
+			print 'datatype eval', id(arguments)
+			arguments.set_data_type(self.word)
+			return arguments
+			
+		def __repr__(self):
+			return '<datatype %s>' % (self.word)
+
 	# identifiers
 	class Identifier(Lexeme):
+
+		def __init__(self, *args, **kwargs):
+		
+			self.data_type = None
+			super(Lang.Identifier, self).__init__(*args, **kwargs)
 		
 		def type(self):
 			return '<ident>'
-				
+
+		def set_data_type(self, data_type):
+			self.data_type = data_type
+		
 		def eval(self, scope, arguments=None, interp=None):
+			
+			print scope
+			print arguments
+			print interp			
+			print self.data_type
+			print '-'*80
+
 			v = scope.get(self.word, None)
 			if arguments is not None and v is not None:
 				return v.call(arguments, interp)
 			else:
-				return v
-				
+				return v		
 	
 	class Keyword(Lexeme):
 
@@ -463,6 +510,7 @@ class Lang(object):
 			
 
 	class Def(Procedure):
+
 		def __init__(self, word, pos=(None,None), **kwargs):
 			self.block = []
 			super(Lang.Procedure, self).__init__(word, pos=(None,None), **kwargs)
@@ -474,6 +522,7 @@ class Lang(object):
 			try:
 				# get arguments
 				self.signature = parser.build(parser.expression())
+
 			except Exception as e:
 				self.signature = Lang.List()
 				
@@ -483,7 +532,7 @@ class Lang(object):
 			return [self, self.identifier, self.signature]
 
 		def eval(self, interp, signature):
-			
+	
 			# store procedure address
 			self.address = interp.pntr
 
@@ -609,7 +658,7 @@ class Lang(object):
 			return [self, self.text]
 		
 		def eval(self, interp, expression):
-			print interp.eval(self.text)
+			print interp.eval(interp.getval(self.text))
 
 		def __repr__(self):
 			return '<prnt>'
@@ -673,6 +722,7 @@ class Lang(object):
 						rules = rules[r] if not callable(rules[r]) else rules[r]()
 						found = True
 						break
+					
 						
 				if not found:
 					return False
