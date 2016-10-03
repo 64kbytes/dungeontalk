@@ -1,4 +1,4 @@
-import re, sys
+import re
 
 # 	TODO 
 #	weird delimiter characters behavior 
@@ -85,11 +85,10 @@ class Lang(object):
 	}
 
 	data_types = {
-		'CONST':	lambda w,t: Lang.DataType(w,t),
-		'STR':		lambda w,t: Lang.DataType(w,t),
-		'INT':		lambda w,t: Lang.DataType(w,t),
-		'FLOAT':	lambda w,t: Lang.DataType(w,t),
-		'LIST':		lambda w,t: Lang.DataType(w,t),
+		'String':	lambda w,t: Lang.DataType(w,t),
+		'Integer':	lambda w,t: Lang.DataType(w,t),
+		'Float':	lambda w,t: Lang.DataType(w,t),
+		'List':		lambda w,t: Lang.DataType(w,t),
 	}
 
 	keywords = {
@@ -299,7 +298,7 @@ class Lang(object):
 		def __repr__(self):
 			return '<op %s>' % (self.word)
 		
-		def eval(self, left, right):
+		def eval(self, left, right, interp):
 			raise NotImplementedError
 	
 	class UnaryOperator(Operator):
@@ -317,16 +316,19 @@ class Lang(object):
 			return not interp.getval(interp.eval(arguments))
 
 	class Assign(Operator):
-		def eval(self, left, right, heap):
-			heap[left.word] = right
+
+		def eval(self, left, right, heap, interp):
+			
+			interp.bind(identifier=left, value=right)
+			#heap[left.word] = right
 			return left
 
 	class Equal(Operator):
-		def eval(self, left, right, scope):
+		def eval(self, left, right, heap, interp):
 			return left == right
 
 	class Inequal(Operator):
-		def eval(self, left, right, scope):
+		def eval(self, left, right, heap, interp):
 			return left != right
 
 	class EqualStrict(Operator):
@@ -336,11 +338,11 @@ class Lang(object):
 		pass
 
 	class Subtract(Operator):
-		def eval(self, left, right, scope):
+		def eval(self, left, right, heap, interp):
 			return left - right
 
 	class Add(Operator):
-		def eval(self, left, right, scope):
+		def eval(self, left, right, heap, interp):
 			return left + right
 
 	class Increment(Operator):
@@ -352,11 +354,11 @@ class Lang(object):
 			pass
 
 	class Divide(Operator):
-		def eval(self, left, right, scope):
+		def eval(self, left, right, heap, interp):
 			return left / right
 
 	class Multiply(Operator):
-		def eval(self, left, right, scope):
+		def eval(self, left, right, heap, interp):
 			return left * right
 
 	# delimiters
@@ -408,14 +410,23 @@ class Lang(object):
 	
 
 	class DataType(Lexeme):
-		
+
 		def type(self):
 			return '<datatype>'
 
 		def eval(self, scope, arguments=None, interp=None):
-			print 'datatype eval', id(arguments)
-			arguments.set_data_type(self.word)
+
+			if hasattr(Lang, self.word):
+				the_type = getattr(Lang, self.word)
+
+			arguments.set_data_type(the_type)
+
 			return arguments
+
+		def __init__(self, word, pos=(None,None), **kwargs):
+			self.word = word
+			self.line, self.char = pos
+			self.set(kwargs)
 			
 		def __repr__(self):
 			return '<datatype %s>' % (self.word)
@@ -436,17 +447,14 @@ class Lang(object):
 		
 		def eval(self, scope, arguments=None, interp=None):
 			
-			print scope
-			print arguments
-			print interp			
-			print self.data_type
-			print '-'*80
-
 			v = scope.get(self.word, None)
 			if arguments is not None and v is not None:
 				return v.call(arguments, interp)
 			else:
-				return v		
+				return v
+
+		def __repr__(self):
+			return "<Identifier(%s)>%s" % (self.data_type, self.word)	
 	
 	class Keyword(Lexeme):
 

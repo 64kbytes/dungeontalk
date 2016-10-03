@@ -146,8 +146,12 @@ class Interpreter(object):
 		"""
 		Bind a variable with a value
 		"""
-		print 'LLLL'
+
 		if isinstance(identifier, self.lang.Identifier):
+			
+			if identifier.data_type is not None:
+				value = identifier.data_type(value, (None, None))
+
 			identifier = identifier.word
 
 		self.memory.write(identifier, value)
@@ -183,7 +187,7 @@ class Interpreter(object):
 		if len(signature) > 0:
 			# assign calling args to routine signature
 			for k,v in enumerate(self.getval(signature)):
-				self.bind(signature[k].pop(), arguments[k])
+				self.bind(self.eval(v), list(arguments)[k])
 		
 		# is function. Return last statement eval
 		if isinstance(routine, self.lang.Def):
@@ -365,10 +369,18 @@ class Interpreter(object):
 			
 			# assign operations
 			if isinstance(i[OPERATOR], self.lang.Assign):
-				return i[OPERATOR].eval(i[OPERAND_L], self.getval(i[OPERAND_R]), self.memory.get_current_scope())
+				return i[OPERATOR].eval(
+					left=i[OPERAND_L], 
+					right=self.getval(i[OPERAND_R]), 
+					heap=self.memory.get_current_scope(),
+					interp=self)
 			# any other binary operation
 			else:
-				return i[OPERATOR].eval(self.getval(i[OPERAND_L]), self.getval(i[OPERAND_R]), self.memory.get_current_scope())
+				return i[OPERATOR].eval(
+					left=self.getval(i[OPERAND_L]), 
+					right=self.getval(i[OPERAND_R]), 
+					heap=self.memory.get_current_scope(),
+					interp=self)
 				
 		else:
 			return i

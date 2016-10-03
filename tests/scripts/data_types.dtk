@@ -1,3 +1,12 @@
-STR niak = 1
 
-prnt niak
+
+def test_func String a, Integer b, Integer c
+	
+	prnt a
+	prnt b
+
+	b+c
+end
+
+
+prnt test_func ['niak', 2,3]
