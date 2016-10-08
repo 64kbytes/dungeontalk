@@ -98,6 +98,7 @@ class Lang(object):
 		'end':			lambda w,t: Lang.End(w,t),
 		'procedure':	lambda w,t: Lang.Procedure(w,t),
 		'def':			lambda w,t: Lang.Def(w,t),
+		'ret': 			lambda w,t: Lang.Ret(w,t),
 		'exec':			lambda w,t: Lang.Exec(w,t),
 		'include':		lambda w,t: Lang.Include(w,t),
 	}
@@ -176,7 +177,7 @@ class Lang(object):
 		Base class for every language word
 		"""
 		
-		def __init__(self, word, pos=(None,None), **kwargs):
+		def __init__(self, word=None, pos=(None,None), **kwargs):
 			self.word = word
 			self.line, self.char = pos
 			self.set(kwargs)
@@ -343,7 +344,10 @@ class Lang(object):
 
 	class Add(Operator):
 		def eval(self, left, right, heap, interp):
-			return left + right
+			try:
+				return left + right
+			except TypeError:
+				raise
 
 	class Increment(Operator):
 		def eval(self, left):
@@ -513,12 +517,14 @@ class Lang(object):
 			# skip function block. We are just declaring the function		
 			interp._move(self.length+1)
 		
-		def call(self):
+		def call(self, arguments, interp):
 			return interp.call(self, arguments)
 			
 
 	class Def(Procedure):
-
+		"""
+		Unlike procedures, functions stores its code block
+		"""
 		def __init__(self, word, pos=(None,None), **kwargs):
 			self.block = []
 			super(Lang.Procedure, self).__init__(word, pos=(None,None), **kwargs)
@@ -533,9 +539,11 @@ class Lang(object):
 
 			except Exception as e:
 				self.signature = Lang.List()
+
+			nesting = parser.get_nesting_level()
 				
 			# get function block
-			self.block = parser.block(until=Lang.End)
+			self.block = parser.block(until=Lang.End(nesting=nesting))
 
 			return [self, self.identifier, self.signature]
 
@@ -552,8 +560,20 @@ class Lang(object):
 		
 		def call(self, arguments, interp):			
 			return interp.call(self, arguments)
-				
-	
+
+	class Ret(Keyword):
+		
+		def type(self):
+			return '<ret>'
+
+		def parse(self, parser, **kwargs):
+			self.expression = parser.build(parser.expression())
+			return [self, self.expression]
+		
+		def eval(self, interp, expression):	
+			self.value = interp.getval(interp.eval(self.expression))
+			return self
+
 	class Exec(Keyword):
 		
 		def type(self):
@@ -618,6 +638,10 @@ class Lang(object):
 
 	
 	class End(Keyword,Control,Delimiter):
+
+		def __init__(self, *args, **kwargs):
+			self.nesting = kwargs.get('nesting', None)
+			super(Lang.End, self).__init__(*args, **kwargs)
 		
 		def type(self):
 			return '<end>'
@@ -666,7 +690,7 @@ class Lang(object):
 			return [self, self.text]
 		
 		def eval(self, interp, expression):
-			print interp.eval(interp.getval(self.text))
+			print interp.getval(interp.eval(self.text))
 
 		def __repr__(self):
 			return '<prnt>'

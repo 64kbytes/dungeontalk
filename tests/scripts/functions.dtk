@@ -1,0 +1,18 @@
+def test_func String a, Integer b, Integer c
+
+	prnt 'A branching inside a function'
+	if a == 'niak'
+		prnt 'Condition was TRUE'
+	else
+		prnt 'Condition was FALSE'
+	end
+
+	prnt a
+	prnt b
+
+	b+c
+end
+
+prnt test_func ['koko', 2,3]
+
+

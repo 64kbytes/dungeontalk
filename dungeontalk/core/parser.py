@@ -138,7 +138,14 @@ class Parser(object):
 				else:
 					return False
 			# stop at delimiter
-			if isinstance(i, until):
+			if isinstance(i, type(until)):
+
+				# match nesting level
+				if isinstance(i, self.lang.End):
+					if self.get_nesting_level() != until.nesting:
+						self.pull_block()
+						continue
+				
 				self.delimiter = i
 				# leave delimiter for further parsing
 				if leave is True:
@@ -233,9 +240,13 @@ class Parser(object):
 		
 		if lexeme is False:
 			return self.EOF()
-			
-		if until is not None and isinstance(lexeme, until):
-			return lexeme
+		
+		try:
+			if until is not None and isinstance(lexeme, until):
+				return lexeme
+		except TypeError:
+			if until is not None and isinstance(lexeme, type(until)):
+				return lexeme
 		
 		# is keyword					
 		if isinstance(lexeme, self.lang.Keyword):
@@ -318,6 +329,9 @@ class Parser(object):
 
 	def set_source(self, source, is_file=False):
 		self.lexer = Lexer(self.lang, source, is_file)
+
+	def get_nesting_level(self):
+		return len(self.blocks)-1
 
 	def __init__(self, lang, source=None, is_file=False):
 		self.count		= 0

@@ -99,13 +99,21 @@ class Interpreter(object):
 			self.memory.push_instruction(gtree)
 			#self.memory.instr.append(gtree)
 
+			print gtree
+
 		
-	def exec_all(self, source=[], build=True):
+	def exec_block(self, source=[], build=True):
 		"""
 		Execute all lines in source code
 		"""
 		for i in source:
 			r = self.eval(i) if build is None else self.eval(self.parser.build(i))
+			
+			# functions returning in mid-block
+			if isinstance(r, self.lang.Ret):
+				self.last = r.value
+				return r.value
+
 			self.last = r
 			
 		return r
@@ -191,8 +199,7 @@ class Interpreter(object):
 		
 		# is function. Return last statement eval
 		if isinstance(routine, self.lang.Def):
-			ret = self.exec_all(routine.block)
-			#print ret
+			ret = self.exec_block(routine.block)
 			self.endcall()
 			return ret
 		# is procedure. Return nothing. Move instruction pointer
